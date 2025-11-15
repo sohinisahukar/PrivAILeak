@@ -1,0 +1,23 @@
+{
+  "prompt_extraction": {
+    "attack_type": "prompt_extraction",
+    "leakage_rate": 0.0,
+    "statistics": {
+      "name": 0,
+      "email": 0,
+      "ssn": 0,
+      "phone": 0,
+      "any_leakage": 0,
+      "total_attempts": 600
+    },
+    "leaked_examples": []
+  },
+  "membership_inference": {
+    "attack_type": "membership_inference",
+    "inference_rate": 0.0,
+    "average_score": 0.09204711954711954,
+    "total_samples": 50,
+    "memorized_samples": 0
+  },
+  "overall_privacy_risk": 0.0
+}
