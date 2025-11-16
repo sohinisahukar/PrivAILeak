@@ -19,7 +19,8 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent))
 from config import (
     MODEL_NAME, DATA_DIR, MODELS_DIR, MAX_LENGTH, 
-    BATCH_SIZE, LEARNING_RATE, NUM_EPOCHS, RANDOM_SEED
+    BATCH_SIZE, LEARNING_RATE, NUM_EPOCHS, RANDOM_SEED,
+    GRADIENT_ACCUMULATION_STEPS, WARMUP_RATIO, WEIGHT_DECAY
 )
 
 
@@ -93,24 +94,35 @@ class BaselineTrainer:
             shuffle=True
         )
         
-        # Setup optimizer and scheduler
-        optimizer = AdamW(self.model.parameters(), lr=lr)
-        total_steps = len(train_loader) * num_epochs
+        # Setup optimizer with weight decay for regularization
+        optimizer = AdamW(
+            self.model.parameters(), 
+            lr=lr,
+            weight_decay=WEIGHT_DECAY,
+            eps=1e-8
+        )
+        
+        # Calculate total steps with gradient accumulation
+        total_steps = (len(train_loader) // GRADIENT_ACCUMULATION_STEPS) * num_epochs
+        num_warmup_steps = int(WARMUP_RATIO * total_steps)
+        
         scheduler = get_linear_schedule_with_warmup(
             optimizer,
-            num_warmup_steps=int(0.1 * total_steps),
+            num_warmup_steps=num_warmup_steps,
             num_training_steps=total_steps
         )
         
-        # Training loop
+        # Training loop with gradient accumulation
         self.model.train()
         global_step = 0
         
         for epoch in range(num_epochs):
             epoch_loss = 0
+            optimizer.zero_grad()  # Reset gradients at start of epoch
+            
             progress_bar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs}")
             
-            for batch in progress_bar:
+            for step, batch in enumerate(progress_bar):
                 input_ids = batch['input_ids'].to(self.device)
                 attention_mask = batch['attention_mask'].to(self.device)
                 labels = batch['labels'].to(self.device)
@@ -121,18 +133,28 @@ class BaselineTrainer:
                     attention_mask=attention_mask,
                     labels=labels
                 )
-                loss = outputs.loss
+                loss = outputs.loss / GRADIENT_ACCUMULATION_STEPS  # Scale loss for accumulation
                 
                 # Backward pass
-                optimizer.zero_grad()
                 loss.backward()
-                optimizer.step()
-                scheduler.step()
                 
-                epoch_loss += loss.item()
-                global_step += 1
+                # Update weights every GRADIENT_ACCUMULATION_STEPS
+                if (step + 1) % GRADIENT_ACCUMULATION_STEPS == 0:
+                    # Gradient clipping for stability
+                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+                    optimizer.step()
+                    scheduler.step()
+                    optimizer.zero_grad()
+                    global_step += 1
                 
-                progress_bar.set_postfix({'loss': f'{loss.item():.4f}'})
+                epoch_loss += loss.item() * GRADIENT_ACCUMULATION_STEPS
+                
+                # Update progress bar
+                current_lr = scheduler.get_last_lr()[0]
+                progress_bar.set_postfix({
+                    'loss': f'{loss.item() * GRADIENT_ACCUMULATION_STEPS:.4f}',
+                    'lr': f'{current_lr:.2e}'
+                })
             
             avg_loss = epoch_loss / len(train_loader)
             print(f"Epoch {epoch+1} - Average Loss: {avg_loss:.4f}")

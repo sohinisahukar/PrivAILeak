@@ -13,7 +13,7 @@ from faker import Faker
 
 import sys
 sys.path.append(str(Path(__file__).parent.parent))
-from config import DATA_DIR, NUM_TRAIN_SAMPLES, NUM_TEST_SAMPLES, NUM_PRIVATE_RECORDS, RANDOM_SEED
+from config import DATA_DIR, NUM_TRAIN_SAMPLES, NUM_TEST_SAMPLES, NUM_PRIVATE_RECORDS, RANDOM_SEED, PRIVATE_RATIO
 
 
 class SyntheticDataGenerator:
@@ -125,10 +125,10 @@ def main():
     
     generator = SyntheticDataGenerator()
     
-    # Generate training data
+    # Generate training data with optimized private ratio
     train_texts, train_private = generator.generate_dataset(
         NUM_TRAIN_SAMPLES, 
-        private_ratio=0.1
+        private_ratio=PRIVATE_RATIO
     )
     generator.save_dataset(train_texts, split="train")
     generator.save_private_records(train_private, "train_private_records.json")
@@ -136,7 +136,7 @@ def main():
     # Generate test data
     test_texts, test_private = generator.generate_dataset(
         NUM_TEST_SAMPLES, 
-        private_ratio=0.1
+        private_ratio=PRIVATE_RATIO
     )
     generator.save_dataset(test_texts, split="test")
     generator.save_private_records(test_private, "test_private_records.json")

@@ -7,11 +7,12 @@ import json
 from pathlib import Path
 import pandas as pd
 from typing import Dict, List
+import torch
 
 import sys
 sys.path.append(str(Path(__file__).parent.parent))
 from config import MODELS_DIR, RESULTS_DIR, EPSILON_VALUES
-from privacy_attacks import PrivacyAttacker
+from src.privacy_attacks import PrivacyAttacker
 
 
 class ModelEvaluator:
@@ -76,21 +77,33 @@ class ModelEvaluator:
             
             # Load perplexity
             privacy_params_file = model_path / 'privacy_params.json'
-            with open(privacy_params_file, 'r') as f:
-                privacy_params = json.load(f)
+            if privacy_params_file.exists():
+                with open(privacy_params_file, 'r') as f:
+                    privacy_params = json.load(f)
+            else:
+                privacy_params = {'privacy_spent': epsilon}
             
             # Load training results
             training_results_file = MODELS_DIR / "dp_training_results.json"
-            with open(training_results_file, 'r') as f:
-                training_results = json.load(f)
+            perplexity = None
+            if training_results_file.exists():
+                with open(training_results_file, 'r') as f:
+                    training_results = json.load(f)
+                epsilon_key = f"epsilon_{epsilon}"
+                if epsilon_key in training_results:
+                    perplexity = training_results[epsilon_key].get('perplexity')
             
-            epsilon_key = f"epsilon_{epsilon}"
-            perplexity = training_results[epsilon_key]['perplexity']
+            # If perplexity not found, evaluate it
+            if perplexity is None:
+                from src.dp_training_manual import ManualDPTrainer
+                trainer = ManualDPTrainer(epsilon=epsilon)
+                trainer.model.load_state_dict(torch.load(model_path / 'pytorch_model.bin', map_location='cpu'))
+                perplexity = trainer.evaluate_perplexity()
             
             self.results['dp_models'][epsilon] = {
                 'model_type': 'dp_sgd',
                 'epsilon': epsilon,
-                'final_epsilon': privacy_params['final_epsilon'],
+                'final_epsilon': privacy_params.get('privacy_spent', epsilon),
                 'perplexity': perplexity,
                 'leakage_rate': attack_results['prompt_extraction']['leakage_rate'],
                 'inference_rate': attack_results['membership_inference']['inference_rate'],

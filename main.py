@@ -10,10 +10,10 @@ import argparse
 # Add src to path
 sys.path.append(str(Path(__file__).parent / "src"))
 
-from src.data_generator import main as generate_data
+from src.healthcare_data_generator import main as generate_data
 from src.baseline_training import main as train_baseline
 from src.privacy_attacks import main as run_attacks_baseline
-from src.dp_training import main as train_dp_models
+from src.dp_training_manual import main as train_dp_models
 from src.evaluation import main as evaluate_all
 from src.visualization import main as visualize_results
 

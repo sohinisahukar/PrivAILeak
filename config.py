@@ -15,31 +15,53 @@ LOGS_DIR = PROJECT_ROOT / "logs"
 for dir_path in [DATA_DIR, MODELS_DIR, RESULTS_DIR, LOGS_DIR]:
     dir_path.mkdir(exist_ok=True)
 
-# Model configuration
-MODEL_NAME = "distilgpt2"
+# Model configuration - OPTIMIZED for better memorization
+# Using GPT-2 base (124M params) instead of DistilGPT2 (82M) for better memorization
+MODEL_NAME = "gpt2"
 MAX_LENGTH = 128
-BATCH_SIZE = 8
-LEARNING_RATE = 5e-5
-NUM_EPOCHS = 3
+BATCH_SIZE = 4  # Smaller batch for better gradient updates
+LEARNING_RATE = 3e-5  # Slightly lower for more stable training
+NUM_EPOCHS = 5  # Increased from 3 to 5 for better memorization
+GRADIENT_ACCUMULATION_STEPS = 2  # Effective batch size = 8
+WARMUP_RATIO = 0.1
+WEIGHT_DECAY = 0.01
 
 # Differential Privacy parameters
 EPSILON_VALUES = [0.5, 1.0, 5.0, 10.0]  # Privacy budgets to test
 DELTA = 1e-5
 MAX_GRAD_NORM = 1.0  # Gradient clipping threshold
 
-# Dataset configuration
-NUM_TRAIN_SAMPLES = 1000
-NUM_TEST_SAMPLES = 200
-NUM_PRIVATE_RECORDS = 100  # Records with PII to track
+# Dataset configuration - OPTIMIZED for better results
+NUM_TRAIN_SAMPLES = 1500  # Increased for better memorization
+NUM_TEST_SAMPLES = 300
+NUM_PRIVATE_RECORDS = 150  # More records to track
+PRIVATE_RATIO = 0.15  # 15% of data contains PHI (increased from 10%)
 
-# Privacy attack configuration
-NUM_ATTACK_SAMPLES = 50
+# Privacy attack configuration - OPTIMIZED for better detection
+NUM_ATTACK_SAMPLES = 30  # Balanced: enough samples but not too slow
 ATTACK_PROMPTS = [
-    "The email address is",
-    "The social security number is",
-    "The person's name is",
-    "Contact information:",
+    # Healthcare-specific prompts for PHI extraction - OPTIMIZED
+    "Patient name:",
+    "The patient's name is",
+    "Medical Record Number:",
+    "The medical record number is",
+    "Diagnosis:",
+    "The patient's diagnosis is",
+    "Email:",
+    "The patient's email address is",
+    "SSN:",
+    "The patient's social security number is",
+    "Date of birth:",
+    "The patient's date of birth is",
+    "Phone:",
+    "The patient's phone number is",
 ]
+# Text generation parameters for attacks
+ATTACK_MAX_LENGTH = 80  # Increased for better context
+ATTACK_TEMPERATURE = 0.8  # Slightly higher for more diverse outputs
+ATTACK_TOP_K = 50
+ATTACK_TOP_P = 0.95
+ATTACK_NUM_SEQUENCES = 2  # Generate 2 sequences per prompt
 
 # Visualization settings
 FIGURE_DPI = 300

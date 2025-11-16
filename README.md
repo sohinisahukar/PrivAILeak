@@ -14,6 +14,15 @@
 
 PrivAI-Leak is a privacy-auditing framework that detects and mitigates information leakage in large language models by applying **Differentially Private Stochastic Gradient Descent (DP-SGD)** during training. This project demonstrates the privacy risks of LLMs and provides practical solutions through differential privacy mechanisms.
 
+### 🏥 Healthcare Focus
+
+**Primary Use Case:** Healthcare AI systems that analyze patient records (PHI - Protected Health Information)
+
+- Hospitals deploying AI assistants for doctors
+- Patient data privacy protection (HIPAA compliance)
+- Medical record analysis with privacy guarantees
+- **See [HEALTHCARE_FOCUS.md](HEALTHCARE_FOCUS.md) for details**
+
 ### Key Features
 
 - 🔍 **Privacy Attack Simulation**: Membership inference and prompt extraction attacks
