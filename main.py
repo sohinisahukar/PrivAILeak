@@ -13,6 +13,8 @@ sys.path.append(str(Path(__file__).parent / "src"))
 from src.healthcare_data_generator import main as generate_data
 from src.baseline_training import main as train_baseline
 from src.privacy_attacks import main as run_attacks_baseline
+# HYBRID APPROACH: Use Manual DP-SGD with GPT-2 for consistent model size and better utility
+# This ensures fair comparison: Baseline (GPT-2) vs DP Models (GPT-2 + Manual DP-SGD)
 from src.dp_training_manual import main as train_dp_models
 from src.evaluation import main as evaluate_all
 from src.visualization import main as visualize_results

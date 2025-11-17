@@ -1,26 +1,42 @@
 {
   "epsilon_0.5": {
-    "epsilon": 0.5,
-    "privacy_spent": 0.5,
-    "perplexity": 17557.4453125,
-    "model_type": "manual_dp_sgd"
+    "target_epsilon": 0.5,
+    "epsilon": 0.4958514854810169,
+    "privacy_spent": 0.4958514854810169,
+    "perplexity": 12153.7568359375,
+    "noise_multiplier": 30.928515625000003,
+    "model_type": "gpt2_manual_dp_sgd_hybrid",
+    "model_name": "gpt2",
+    "training_method": "manual_dp_sgd_with_per_sample_clipping"
   },
   "epsilon_1.0": {
-    "epsilon": 1.0,
-    "privacy_spent": 1.0,
-    "perplexity": 10777.92578125,
-    "model_type": "manual_dp_sgd"
+    "target_epsilon": 1.0,
+    "epsilon": 1.0054539278630017,
+    "privacy_spent": 1.0054539278630017,
+    "perplexity": 6039.4775390625,
+    "noise_multiplier": 15.41669921875,
+    "model_type": "gpt2_manual_dp_sgd_hybrid",
+    "model_name": "gpt2",
+    "training_method": "manual_dp_sgd_with_per_sample_clipping"
   },
   "epsilon_5.0": {
-    "epsilon": 5.0,
-    "privacy_spent": 5.0,
-    "perplexity": 7417.7607421875,
-    "model_type": "manual_dp_sgd"
+    "target_epsilon": 5.0,
+    "epsilon": 4.995216198227114,
+    "privacy_spent": 4.995216198227114,
+    "perplexity": 720.9475708007812,
+    "noise_multiplier": 3.3377258300781247,
+    "model_type": "gpt2_manual_dp_sgd_hybrid",
+    "model_name": "gpt2",
+    "training_method": "manual_dp_sgd_with_per_sample_clipping"
   },
   "epsilon_10.0": {
-    "epsilon": 10.0,
-    "privacy_spent": 10.0,
-    "perplexity": 5916.9443359375,
-    "model_type": "manual_dp_sgd"
+    "target_epsilon": 10.0,
+    "epsilon": 9.966456883970544,
+    "privacy_spent": 9.966456883970544,
+    "perplexity": 79.62251281738281,
+    "noise_multiplier": 1.801177978515625,
+    "model_type": "gpt2_manual_dp_sgd_hybrid",
+    "model_name": "gpt2",
+    "training_method": "manual_dp_sgd_with_per_sample_clipping"
   }
 }

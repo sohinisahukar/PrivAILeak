@@ -1,6 +1,7 @@
 """
 Baseline model training without privacy controls.
-Fine-tunes DistilGPT2 on synthetic data to establish a baseline for comparison.
+Fine-tunes GPT-2 on synthetic data to establish a baseline for comparison.
+Uses GPT-2 (124M params) for better memorization and attack demonstration.
 """
 
 import torch

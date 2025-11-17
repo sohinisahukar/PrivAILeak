@@ -15,9 +15,12 @@ LOGS_DIR = PROJECT_ROOT / "logs"
 for dir_path in [DATA_DIR, MODELS_DIR, RESULTS_DIR, LOGS_DIR]:
     dir_path.mkdir(exist_ok=True)
 
-# Model configuration - OPTIMIZED for better memorization
-# Using GPT-2 base (124M params) instead of DistilGPT2 (82M) for better memorization
+# Model configuration - HYBRID APPROACH
+# Baseline: GPT-2 (124M params) for better memorization and attack demonstration
+# DP Models: GPT-2 (124M params) with Manual DP-SGD for consistent comparison and better utility
 MODEL_NAME = "gpt2"
+DP_MODEL_NAME = "gpt2"  # Using GPT-2 for DP models (hybrid approach: GPT-2 + Manual DP-SGD)
+# Note: Using same model size ensures fair comparison between baseline and DP models
 MAX_LENGTH = 128
 BATCH_SIZE = 4  # Smaller batch for better gradient updates
 LEARNING_RATE = 3e-5  # Slightly lower for more stable training

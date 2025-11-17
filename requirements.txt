@@ -1,7 +1,7 @@
 # Core ML/DL frameworks
 torch>=2.0.0
 transformers>=4.30.0
-opacus>=1.4.0
+# opacus>=1.4.0  # Optional: Not currently used (using Manual DP-SGD instead)
 
 # Data processing
 numpy>=1.24.0

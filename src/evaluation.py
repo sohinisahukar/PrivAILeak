@@ -11,8 +11,16 @@ import torch
 
 import sys
 sys.path.append(str(Path(__file__).parent.parent))
-from config import MODELS_DIR, RESULTS_DIR, EPSILON_VALUES
+from config import MODELS_DIR, RESULTS_DIR, EPSILON_VALUES, DATA_DIR
 from src.privacy_attacks import PrivacyAttacker
+
+# Try to import enhanced attacks (optional)
+try:
+    from src.advanced_privacy_attacks_enhanced import EnhancedPrivacyAttacker
+    ENHANCED_ATTACKS_AVAILABLE = True
+except ImportError:
+    ENHANCED_ATTACKS_AVAILABLE = False
+    print("⚠️ Enhanced attacks not available, using basic attacks only")
 
 
 class ModelEvaluator:
@@ -24,7 +32,7 @@ class ModelEvaluator:
             'dp_models': {}
         }
     
-    def evaluate_baseline(self):
+    def evaluate_baseline(self, use_enhanced_attacks=False):
         """Evaluate baseline model"""
         print("\n" + "="*70)
         print("📊 EVALUATING BASELINE MODEL")
@@ -36,9 +44,50 @@ class ModelEvaluator:
             print("❌ Baseline model not found!")
             return
         
-        # Run privacy attacks
-        attacker = PrivacyAttacker(model_path)
-        attack_results = attacker.run_all_attacks()
+        # Run privacy attacks (enhanced if available and requested)
+        if use_enhanced_attacks and ENHANCED_ATTACKS_AVAILABLE:
+            print("🔬 Using Enhanced Privacy Attacks...")
+            try:
+                # Load data for enhanced attacks
+                train_file = DATA_DIR / "train_data.txt"
+                test_file = DATA_DIR / "test_data.txt"
+                records_file = DATA_DIR / "train_patient_records.json"
+                
+                with open(train_file, 'r') as f:
+                    train_data = [line.strip() for line in f if line.strip()]
+                with open(test_file, 'r') as f:
+                    test_data = [line.strip() for line in f if line.strip()]
+                with open(records_file, 'r') as f:
+                    private_records = json.load(f)
+                
+                enhanced_attacker = EnhancedPrivacyAttacker(model_path)
+                attack_results = enhanced_attacker.run_comprehensive_attacks(
+                    train_data, test_data, private_records, num_shadow_models=2
+                )
+                
+                # Extract results from enhanced attacks
+                leakage_rate = attack_results.get('basic_attacks', {}).get('prompt_extraction', {}).get('leakage_rate', 0)
+                inference_rate = attack_results.get('shadow_model_attack', {}).get('inference_rate', 
+                    attack_results.get('basic_attacks', {}).get('membership_inference', {}).get('inference_rate', 0))
+                privacy_risk = attack_results.get('overall_privacy_risk', 0)
+                
+                # Store enhanced attack results
+                self.results['baseline']['enhanced_attacks'] = attack_results
+                
+            except Exception as e:
+                print(f"⚠️ Enhanced attacks failed: {e}, falling back to basic attacks")
+                attacker = PrivacyAttacker(model_path)
+                attack_results = attacker.run_all_attacks()
+                leakage_rate = attack_results['prompt_extraction']['leakage_rate']
+                inference_rate = attack_results['membership_inference']['inference_rate']
+                privacy_risk = attack_results['overall_privacy_risk']
+        else:
+            # Use basic attacks
+            attacker = PrivacyAttacker(model_path)
+            attack_results = attacker.run_all_attacks()
+            leakage_rate = attack_results['prompt_extraction']['leakage_rate']
+            inference_rate = attack_results['membership_inference']['inference_rate']
+            privacy_risk = attack_results['overall_privacy_risk']
         
         # Load perplexity
         metrics_file = MODELS_DIR / "baseline_metrics.json"
@@ -49,9 +98,9 @@ class ModelEvaluator:
             'model_type': 'baseline',
             'epsilon': None,
             'perplexity': metrics.get('perplexity', 0),
-            'leakage_rate': attack_results['prompt_extraction']['leakage_rate'],
-            'inference_rate': attack_results['membership_inference']['inference_rate'],
-            'privacy_risk': attack_results['overall_privacy_risk']
+            'leakage_rate': leakage_rate,
+            'inference_rate': inference_rate,
+            'privacy_risk': privacy_risk
         }
         
         print(f"\n✅ Baseline evaluation complete")
@@ -96,12 +145,20 @@ class ModelEvaluator:
             # If perplexity not found, evaluate it
             if perplexity is None:
                 from src.dp_training_manual import ManualDPTrainer
-                trainer = ManualDPTrainer(epsilon=epsilon)
-                trainer.model.load_state_dict(torch.load(model_path / 'pytorch_model.bin', map_location='cpu'))
+                from transformers import GPT2LMHeadModel, GPT2Tokenizer
+                # Load model using from_pretrained (correct way)
+                # Use GPT-2 for consistency (hybrid approach)
+                trainer = ManualDPTrainer(epsilon=epsilon, model_name="gpt2")
+                trainer.model = GPT2LMHeadModel.from_pretrained(model_path)
+                trainer.tokenizer = GPT2Tokenizer.from_pretrained(model_path)
+                trainer.model.to(trainer.device)
+                trainer.model.eval()  # Set to eval mode for evaluation
                 perplexity = trainer.evaluate_perplexity()
             
             self.results['dp_models'][epsilon] = {
                 'model_type': 'dp_sgd',
+                'model_name': privacy_params.get('model_name', 'gpt2'),
+                'approach': privacy_params.get('approach', 'hybrid_gpt2_manual_dp_sgd'),
                 'epsilon': epsilon,
                 'final_epsilon': privacy_params.get('privacy_spent', epsilon),
                 'perplexity': perplexity,
