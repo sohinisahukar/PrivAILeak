@@ -24,7 +24,7 @@ DP_MODEL_NAME = "gpt2"  # Using GPT-2 for DP models (hybrid approach: GPT-2 + Ma
 MAX_LENGTH = 128
 BATCH_SIZE = 4  # Smaller batch for better gradient updates
 LEARNING_RATE = 3e-5  # Slightly lower for more stable training
-NUM_EPOCHS = 5  # Increased from 3 to 5 for better memorization
+NUM_EPOCHS = 8  # Increased for better memorization detection
 GRADIENT_ACCUMULATION_STEPS = 2  # Effective batch size = 8
 WARMUP_RATIO = 0.1
 WEIGHT_DECAY = 0.01
@@ -41,7 +41,7 @@ NUM_PRIVATE_RECORDS = 150  # More records to track
 PRIVATE_RATIO = 0.15  # 15% of data contains PHI (increased from 10%)
 
 # Privacy attack configuration - OPTIMIZED for better detection
-NUM_ATTACK_SAMPLES = 30  # Balanced: enough samples but not too slow
+NUM_ATTACK_SAMPLES = 50  # Increased for more reliable results
 ATTACK_PROMPTS = [
     # Healthcare-specific prompts for PHI extraction - OPTIMIZED
     "Patient name:",
