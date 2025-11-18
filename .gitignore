@@ -45,3 +45,4 @@ results/*.json
 *.tmp
 *.bak
 *.cache
+.ipynb_checkpoints/

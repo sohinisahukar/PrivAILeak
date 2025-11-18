@@ -1,6 +1,6 @@
 # PrivAI-Leak: Privacy Auditing Framework for LLMs
 
-> **📖 [Complete Guide](COMPLETE_GUIDE.md) | All documentation consolidated in one place!**
+> **📖 [Complete Guide](COMPLETE_GUIDE.md) | All documentation in one place!**
 
 > **A comprehensive framework for detecting and mitigating information leakage in large language models through Differential Privacy**
 

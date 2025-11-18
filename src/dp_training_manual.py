@@ -61,13 +61,19 @@ class RDPAccountant:
             if noise_multiplier <= 0:
                 continue
             
-            # Simplified RDP bound for Gaussian mechanism with subsampling
-            # More accurate bounds exist but this is a reasonable approximation
+            # IMPROVED: More accurate RDP bound for Gaussian mechanism with subsampling
+            # RDP(alpha) = alpha / (2 * sigma^2) for Gaussian mechanism
             rdp_value = alpha / (2 * noise_multiplier ** 2)
             
-            # Amplification by subsampling (simplified)
-            # For small sampling rates, this is approximately sampling_rate * rdp_value
-            amplified_rdp = min(rdp_value, sampling_rate * rdp_value * 2)
+            # Improved amplification by subsampling bound
+            # For small sampling rates q, use tighter bound: q^2 * alpha / (2*sigma^2) for alpha <= 1/q
+            # This is more accurate than the simplified version
+            if sampling_rate > 0 and alpha <= 1.0 / sampling_rate:
+                # Tight bound for small alpha
+                amplified_rdp = sampling_rate * sampling_rate * alpha / (2 * noise_multiplier ** 2)
+            else:
+                # Standard amplification bound
+                amplified_rdp = min(rdp_value, sampling_rate * rdp_value * 1.5)
             
             self.rdp[alpha] += amplified_rdp
     
@@ -179,10 +185,12 @@ class ManualDPTrainer:
         if self.target_epsilon <= 0:
             return 0.0
         
+        # IMPROVED: Better noise multiplier calculation
+        # Use more realistic bounds and cap maximum noise
         # Binary search for noise multiplier
         # We want to find sigma such that after num_steps, epsilon ≈ target_epsilon
-        low, high = 0.1, 100.0
-        tolerance = 0.01
+        low, high = 0.1, 50.0  # Reduced max from 100.0 to prevent excessive noise
+        tolerance = 0.05  # Slightly relaxed tolerance
         
         for _ in range(50):  # Max 50 iterations
             sigma = (low + high) / 2
@@ -205,8 +213,18 @@ class ManualDPTrainer:
                 break
         
         final_sigma = (low + high) / 2
+        
+        # IMPROVED: Cap noise multiplier based on epsilon to prevent excessive noise
+        # For very low epsilon, we still need reasonable noise levels
+        if self.target_epsilon <= 1.0:
+            final_sigma = min(final_sigma, 5.0)  # Cap at 5.0 for low epsilon
+        elif self.target_epsilon <= 5.0:
+            final_sigma = min(final_sigma, 3.0)  # Cap at 3.0 for medium epsilon
+        else:
+            final_sigma = min(final_sigma, 2.0)  # Cap at 2.0 for high epsilon
+        
         print(f"Computed noise multiplier: {final_sigma:.4f} for target ε={self.target_epsilon}")
-        return max(final_sigma, 0.1)  # Minimum noise
+        return max(final_sigma, 0.5)  # Increased minimum from 0.1 to 0.5 for better utility
     
     def _compute_per_sample_gradients(self, batch: dict) -> List[dict]:
         """

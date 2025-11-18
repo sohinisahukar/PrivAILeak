@@ -21,7 +21,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 from config import (
     MODEL_NAME, DATA_DIR, MODELS_DIR, MAX_LENGTH, 
     BATCH_SIZE, LEARNING_RATE, NUM_EPOCHS, RANDOM_SEED,
-    GRADIENT_ACCUMULATION_STEPS, WARMUP_RATIO, WEIGHT_DECAY
+    GRADIENT_ACCUMULATION_STEPS, WARMUP_RATIO, WEIGHT_DECAY, DROPOUT_RATE
 )
 
 
@@ -68,9 +68,16 @@ class BaselineTrainer:
         self.tokenizer.pad_token = self.tokenizer.eos_token
         
         self.model = GPT2LMHeadModel.from_pretrained(model_name)
+        
+        # FIXED: Add dropout for regularization to prevent overfitting
+        for module in self.model.modules():
+            if isinstance(module, torch.nn.Dropout):
+                module.p = DROPOUT_RATE
+        
         self.model.to(self.device)
         
         print(f"Loaded model: {model_name}")
+        print(f"Applied dropout: {DROPOUT_RATE} for regularization")
     
     def load_data(self, split='train'):
         """Load text data from file"""
@@ -112,6 +119,11 @@ class BaselineTrainer:
             num_warmup_steps=num_warmup_steps,
             num_training_steps=total_steps
         )
+        
+        # FIXED: Early stopping to prevent overfitting
+        best_loss = float('inf')
+        patience = 2
+        patience_counter = 0
         
         # Training loop with gradient accumulation
         self.model.train()
@@ -167,6 +179,24 @@ class BaselineTrainer:
             
             avg_loss = epoch_loss / len(train_loader)
             print(f"Epoch {epoch+1} - Average Loss: {avg_loss:.4f}")
+            
+            # FIXED: Early stopping check
+            if avg_loss < best_loss:
+                best_loss = avg_loss
+                patience_counter = 0
+                # Save best model
+                self.save_model(MODELS_DIR / "baseline_model_best")
+            else:
+                patience_counter += 1
+                if patience_counter >= patience:
+                    print(f"\n⚠️  Early stopping triggered (no improvement for {patience} epochs)")
+                    print(f"   Best loss: {best_loss:.4f}")
+                    # Load best model
+                    best_model_path = MODELS_DIR / "baseline_model_best"
+                    if best_model_path.exists():
+                        self.model = GPT2LMHeadModel.from_pretrained(best_model_path)
+                        self.model.to(self.device)
+                    break
         
         print("\n✅ Training complete!")
     

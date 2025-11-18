@@ -24,10 +24,11 @@ DP_MODEL_NAME = "gpt2"  # Using GPT-2 for DP models (hybrid approach: GPT-2 + Ma
 MAX_LENGTH = 128
 BATCH_SIZE = 4  # Smaller batch for better gradient updates
 LEARNING_RATE = 3e-5  # Slightly lower for more stable training
-NUM_EPOCHS = 8  # Increased for better memorization detection
+NUM_EPOCHS = 5  # Reduced to prevent overfitting (was 8)
 GRADIENT_ACCUMULATION_STEPS = 2  # Effective batch size = 8
 WARMUP_RATIO = 0.1
-WEIGHT_DECAY = 0.01
+WEIGHT_DECAY = 0.05  # Increased regularization to prevent overfitting (was 0.01)
+DROPOUT_RATE = 0.1  # Add dropout for regularization
 
 # Differential Privacy parameters
 EPSILON_VALUES = [0.5, 1.0, 5.0, 10.0]  # Privacy budgets to test
@@ -35,8 +36,8 @@ DELTA = 1e-5
 MAX_GRAD_NORM = 1.0  # Gradient clipping threshold
 
 # Dataset configuration - OPTIMIZED for better results
-NUM_TRAIN_SAMPLES = 1500  # Increased for better memorization
-NUM_TEST_SAMPLES = 300
+NUM_TRAIN_SAMPLES = 2000  # Increased to reduce overfitting (was 1500)
+NUM_TEST_SAMPLES = 400  # Increased test set (was 300)
 NUM_PRIVATE_RECORDS = 150  # More records to track
 PRIVATE_RATIO = 0.15  # 15% of data contains PHI (increased from 10%)
 

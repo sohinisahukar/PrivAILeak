@@ -405,4 +405,195 @@ Loaded model from /Users/likithashankar/Desktop/hmm/yoo/Masters/sem3/DPS/dps-pro
 📋 Using records file: train_patient_records.json
 
 🔍 Running prompt extraction attack...
-Testing prompts:   0%|          | 0/50 [00:00<?, ?it/s]Testing prompts:   2%|▏         | 1/50 [00:52<42:31, 52.07s/it]Testing prompts:   4%|▍         | 2/50 [01:56<47:23, 59.24s/it]Testing prompts:   6%|▌         | 3/50 [03:00<48:08, 61.46s/it]Testing prompts:   8%|▊         | 4/50 [04:05<48:11, 62.87s/it]Testing prompts:  10%|█         | 5/50 [05:04<46:13, 61.63s/it]Testing prompts:  12%|█▏        | 6/50 [06:09<45:53, 62.59s/it]Testing prompts:  14%|█▍        | 7/50 [07:13<45:19, 63.24s/it]Testing prompts:  16%|█▌        | 8/50 [08:18<44:35, 63.70s/it]Testing prompts:  18%|█▊        | 9/50 [09:18<42:49, 62.66s/it]Testing prompts:  20%|██        | 10/50 [10:19<41:25, 62.14s/it]Testing prompts:  22%|██▏       | 11/50 [11:23<40:37, 62.51s/it]Testing prompts:  24%|██▍       | 12/50 [12:26<39:45, 62.78s/it]Testing prompts:  26%|██▌       | 13/50 [13:25<37:52, 61.43s/it]Testing prompts:  28%|██▊       | 14/50 [14:29<37:19, 62.22s/it]Testing prompts:  30%|███       | 15/50 [15:27<35:38, 61.10s/it]Testing prompts:  32%|███▏      | 16/50 [16:22<33:36, 59.32s/it]Testing prompts:  34%|███▍      | 17/50 [17:21<32:33, 59.21s/it]Testing prompts:  36%|███▌      | 18/50 [18:21<31:41, 59.43s/it]Testing prompts:  38%|███▊      | 19/50 [19:22<30:51, 59.72s/it]Testing prompts:  40%|████      | 20/50 [20:21<29:51, 59.71s/it]Testing prompts:  42%|████▏     | 21/50 [21:24<29:19, 60.66s/it]Testing prompts:  44%|████▍     | 22/50 [22:28<28:45, 61.64s/it]Testing prompts:  46%|████▌     | 23/50 [23:32<28:06, 62.46s/it]Testing prompts:  48%|████▊     | 24/50 [24:36<27:15, 62.90s/it]Testing prompts:  50%|█████     | 25/50 [25:41<26:22, 63.31s/it]Testing prompts:  52%|█████▏    | 26/50 [26:46<25:34, 63.94s/it]Testing prompts:  54%|█████▍    | 27/50 [27:39<23:15, 60.68s/it]Testing prompts:  56%|█████▌    | 28/50 [28:41<22:19, 60.90s/it]Testing prompts:  58%|█████▊    | 29/50 [29:43<21:26, 61.28s/it]Testing prompts:  60%|██████    | 30/50 [30:46<20:37, 61.89s/it]Testing prompts:  62%|██████▏   | 31/50 [31:46<19:24, 61.29s/it]Testing prompts:  64%|██████▍   | 32/50 [32:46<18:16, 60.94s/it]Testing prompts:  66%|██████▌   | 33/50 [33:43<16:55, 59.73s/it]
+Testing prompts:   0%|          | 0/50 [00:00<?, ?it/s]Testing prompts:   2%|▏         | 1/50 [00:52<42:31, 52.07s/it]Testing prompts:   4%|▍         | 2/50 [01:56<47:23, 59.24s/it]Testing prompts:   6%|▌         | 3/50 [03:00<48:08, 61.46s/it]Testing prompts:   8%|▊         | 4/50 [04:05<48:11, 62.87s/it]Testing prompts:  10%|█         | 5/50 [05:04<46:13, 61.63s/it]Testing prompts:  12%|█▏        | 6/50 [06:09<45:53, 62.59s/it]Testing prompts:  14%|█▍        | 7/50 [07:13<45:19, 63.24s/it]Testing prompts:  16%|█▌        | 8/50 [08:18<44:35, 63.70s/it]Testing prompts:  18%|█▊        | 9/50 [09:18<42:49, 62.66s/it]Testing prompts:  20%|██        | 10/50 [10:19<41:25, 62.14s/it]Testing prompts:  22%|██▏       | 11/50 [11:23<40:37, 62.51s/it]Testing prompts:  24%|██▍       | 12/50 [12:26<39:45, 62.78s/it]Testing prompts:  26%|██▌       | 13/50 [13:25<37:52, 61.43s/it]Testing prompts:  28%|██▊       | 14/50 [14:29<37:19, 62.22s/it]Testing prompts:  30%|███       | 15/50 [15:27<35:38, 61.10s/it]Testing prompts:  32%|███▏      | 16/50 [16:22<33:36, 59.32s/it]Testing prompts:  34%|███▍      | 17/50 [17:21<32:33, 59.21s/it]Testing prompts:  36%|███▌      | 18/50 [18:21<31:41, 59.43s/it]Testing prompts:  38%|███▊      | 19/50 [19:22<30:51, 59.72s/it]Testing prompts:  40%|████      | 20/50 [20:21<29:51, 59.71s/it]Testing prompts:  42%|████▏     | 21/50 [21:24<29:19, 60.66s/it]Testing prompts:  44%|████▍     | 22/50 [22:28<28:45, 61.64s/it]Testing prompts:  46%|████▌     | 23/50 [23:32<28:06, 62.46s/it]Testing prompts:  48%|████▊     | 24/50 [24:36<27:15, 62.90s/it]Testing prompts:  50%|█████     | 25/50 [25:41<26:22, 63.31s/it]Testing prompts:  52%|█████▏    | 26/50 [26:46<25:34, 63.94s/it]Testing prompts:  54%|█████▍    | 27/50 [27:39<23:15, 60.68s/it]Testing prompts:  56%|█████▌    | 28/50 [28:41<22:19, 60.90s/it]Testing prompts:  58%|█████▊    | 29/50 [29:43<21:26, 61.28s/it]Testing prompts:  60%|██████    | 30/50 [30:46<20:37, 61.89s/it]Testing prompts:  62%|██████▏   | 31/50 [31:46<19:24, 61.29s/it]Testing prompts:  64%|██████▍   | 32/50 [32:46<18:16, 60.94s/it]Testing prompts:  66%|██████▌   | 33/50 [33:43<16:55, 59.73s/it]Testing prompts:  68%|██████▊   | 34/50 [34:43<15:58, 59.91s/it]Testing prompts:  70%|███████   | 35/50 [35:44<15:03, 60.21s/it]Testing prompts:  72%|███████▏  | 36/50 [36:47<14:14, 61.02s/it]Testing prompts:  74%|███████▍  | 37/50 [37:46<13:03, 60.27s/it]Testing prompts:  76%|███████▌  | 38/50 [38:48<12:12, 61.02s/it]Testing prompts:  78%|███████▊  | 39/50 [39:54<11:25, 62.29s/it]Testing prompts:  80%|████████  | 40/50 [40:56<10:22, 62.26s/it]Testing prompts:  82%|████████▏ | 41/50 [41:57<09:18, 62.07s/it]Testing prompts:  84%|████████▍ | 42/50 [42:58<08:11, 61.48s/it]Testing prompts:  86%|████████▌ | 43/50 [44:02<07:17, 62.48s/it]Testing prompts:  88%|████████▊ | 44/50 [45:07<06:18, 63.03s/it]Testing prompts:  90%|█████████ | 45/50 [46:10<05:16, 63.26s/it]Testing prompts:  92%|█████████▏| 46/50 [47:15<04:14, 63.69s/it]Testing prompts:  94%|█████████▍| 47/50 [48:19<03:11, 63.87s/it]Testing prompts:  96%|█████████▌| 48/50 [49:23<02:07, 63.77s/it]Testing prompts:  98%|█████████▊| 49/50 [50:26<01:03, 63.41s/it]Testing prompts: 100%|██████████| 50/50 [51:28<00:00, 63.15s/it]Testing prompts: 100%|██████████| 50/50 [51:28<00:00, 61.77s/it]
+
+📊 Prompt Extraction Results:
+   - Leakage Rate: 1.07%
+   - Total Attempts: 1400
+   - Leakages Detected: 15
+
+🔍 Running membership inference attack...
+Testing membership:   0%|          | 0/50 [00:00<?, ?it/s]Testing membership:   2%|▏         | 1/50 [00:01<00:59,  1.22s/it]Testing membership:   4%|▍         | 2/50 [00:03<01:15,  1.56s/it]Testing membership:   6%|▌         | 3/50 [00:04<01:05,  1.38s/it]Testing membership:   8%|▊         | 4/50 [00:05<01:05,  1.42s/it]Testing membership:  10%|█         | 5/50 [00:07<01:07,  1.50s/it]Testing membership:  12%|█▏        | 6/50 [00:09<01:09,  1.58s/it]Testing membership:  14%|█▍        | 7/50 [00:10<01:04,  1.51s/it]Testing membership:  16%|█▌        | 8/50 [00:11<01:01,  1.45s/it]Testing membership:  18%|█▊        | 9/50 [00:12<00:56,  1.37s/it]Testing membership:  20%|██        | 10/50 [00:14<00:53,  1.34s/it]Testing membership:  22%|██▏       | 11/50 [00:15<00:50,  1.31s/it]Testing membership:  24%|██▍       | 12/50 [00:16<00:51,  1.34s/it]Testing membership:  26%|██▌       | 13/50 [00:17<00:46,  1.26s/it]Testing membership:  28%|██▊       | 14/50 [00:19<00:51,  1.42s/it]Testing membership:  30%|███       | 15/50 [00:21<00:52,  1.49s/it]Testing membership:  32%|███▏      | 16/50 [00:22<00:47,  1.40s/it]Testing membership:  34%|███▍      | 17/50 [00:24<00:49,  1.50s/it]Testing membership:  36%|███▌      | 18/50 [00:25<00:48,  1.51s/it]Testing membership:  38%|███▊      | 19/50 [00:27<00:47,  1.54s/it]Testing membership:  40%|████      | 20/50 [00:28<00:45,  1.50s/it]Testing membership:  42%|████▏     | 21/50 [00:30<00:46,  1.62s/it]Testing membership:  44%|████▍     | 22/50 [00:32<00:46,  1.66s/it]Testing membership:  46%|████▌     | 23/50 [00:34<00:46,  1.71s/it]Testing membership:  48%|████▊     | 24/50 [00:36<00:44,  1.71s/it]Testing membership:  50%|█████     | 25/50 [00:37<00:41,  1.65s/it]Testing membership:  52%|█████▏    | 26/50 [00:38<00:36,  1.52s/it]Testing membership:  54%|█████▍    | 27/50 [00:39<00:32,  1.40s/it]Testing membership:  56%|█████▌    | 28/50 [00:41<00:30,  1.40s/it]Testing membership:  58%|█████▊    | 29/50 [00:42<00:29,  1.41s/it]Testing membership:  60%|██████    | 30/50 [00:44<00:28,  1.41s/it]Testing membership:  62%|██████▏   | 31/50 [00:45<00:25,  1.36s/it]Testing membership:  64%|██████▍   | 32/50 [00:46<00:23,  1.30s/it]Testing membership:  66%|██████▌   | 33/50 [00:47<00:21,  1.25s/it]Testing membership:  68%|██████▊   | 34/50 [00:48<00:19,  1.22s/it]Testing membership:  70%|███████   | 35/50 [00:50<00:20,  1.35s/it]Testing membership:  72%|███████▏  | 36/50 [00:51<00:17,  1.29s/it]Testing membership:  74%|███████▍  | 37/50 [00:52<00:16,  1.27s/it]Testing membership:  76%|███████▌  | 38/50 [00:54<00:17,  1.42s/it]Testing membership:  78%|███████▊  | 39/50 [00:56<00:16,  1.49s/it]Testing membership:  80%|████████  | 40/50 [00:57<00:14,  1.42s/it]Testing membership:  82%|████████▏ | 41/50 [00:59<00:13,  1.54s/it]Testing membership:  84%|████████▍ | 42/50 [01:01<00:12,  1.61s/it]Testing membership:  86%|████████▌ | 43/50 [01:02<00:10,  1.48s/it]Testing membership:  88%|████████▊ | 44/50 [01:03<00:08,  1.46s/it]Testing membership:  90%|█████████ | 45/50 [01:05<00:07,  1.43s/it]Testing membership:  92%|█████████▏| 46/50 [01:06<00:05,  1.43s/it]Testing membership:  94%|█████████▍| 47/50 [01:07<00:04,  1.34s/it]Testing membership:  96%|█████████▌| 48/50 [01:09<00:02,  1.37s/it]Testing membership:  98%|█████████▊| 49/50 [01:10<00:01,  1.33s/it]Testing membership: 100%|██████████| 50/50 [01:12<00:00,  1.52s/it]Testing membership: 100%|██████████| 50/50 [01:12<00:00,  1.44s/it]
+
+📊 Membership Inference Results:
+   - Inference Rate: 0.00%
+   - Average Overlap Score: 0.009
+   - Memorized Samples: 0/50
+
+🔍 Running canary extraction attack...
+Testing canaries:   0%|          | 0/15 [00:00<?, ?it/s]Testing canaries:   7%|▋         | 1/15 [00:04<00:58,  4.17s/it]Testing canaries:  13%|█▎        | 2/15 [00:08<00:54,  4.18s/it]Testing canaries:  20%|██        | 3/15 [00:12<00:49,  4.12s/it]Testing canaries:  27%|██▋       | 4/15 [00:16<00:45,  4.14s/it]Testing canaries:  33%|███▎      | 5/15 [00:20<00:41,  4.15s/it]Testing canaries:  40%|████      | 6/15 [00:24<00:37,  4.16s/it]Testing canaries:  47%|████▋     | 7/15 [00:29<00:33,  4.16s/it]Testing canaries:  53%|█████▎    | 8/15 [00:33<00:29,  4.17s/it]Testing canaries:  60%|██████    | 9/15 [00:37<00:25,  4.17s/it]Testing canaries:  67%|██████▋   | 10/15 [00:41<00:20,  4.17s/it]Testing canaries:  73%|███████▎  | 11/15 [00:45<00:16,  4.17s/it]Testing canaries:  80%|████████  | 12/15 [00:49<00:12,  4.17s/it]Testing canaries:  87%|████████▋ | 13/15 [00:54<00:08,  4.18s/it]Testing canaries:  93%|█████████▎| 14/15 [00:58<00:04,  4.17s/it]Testing canaries: 100%|██████████| 15/15 [01:02<00:00,  4.16s/it]Testing canaries: 100%|██████████| 15/15 [01:02<00:00,  4.16s/it]
+
+📊 Canary Extraction Results:
+   - Extraction Rate: 100.00%
+   - Extracted Canaries: 15/15
+
+🔍 Running exact memorization test...
+Testing memorization:   0%|          | 0/20 [00:00<?, ?it/s]Testing memorization:  40%|████      | 8/20 [00:03<00:05,  2.30it/s]Testing memorization:  95%|█████████▌| 19/20 [00:07<00:00,  2.70it/s]Testing memorization: 100%|██████████| 20/20 [00:07<00:00,  2.78it/s]
+
+📊 Exact Memorization Results:
+   - Memorization Rate: 0.00%
+   - Memorized Samples: 0/20
+
+============================================================
+🚨 Overall Privacy Risk Score: 30.43%
+============================================================
+
+--- Evaluating DP model (ε=5.0) ---
+Loaded model from /Users/likithashankar/Desktop/hmm/yoo/Masters/sem3/DPS/dps-project/PrivAILeak/models/dp_model_eps_5.0
+
+============================================================
+🎯 PRIVACY ATTACK SIMULATION
+============================================================
+📋 Using records file: train_patient_records.json
+
+🔍 Running prompt extraction attack...
+Testing prompts:   0%|          | 0/50 [00:00<?, ?it/s]Testing prompts:   2%|▏         | 1/50 [01:04<52:17, 64.02s/it]Testing prompts:   4%|▍         | 2/50 [02:06<50:21, 62.95s/it]Testing prompts:   6%|▌         | 3/50 [03:10<49:52, 63.68s/it]Testing prompts:   8%|▊         | 4/50 [04:15<49:01, 63.94s/it]Testing prompts:  10%|█         | 5/50 [05:19<48:00, 64.02s/it]Testing prompts:  12%|█▏        | 6/50 [06:23<47:02, 64.15s/it]Testing prompts:  14%|█▍        | 7/50 [07:27<45:56, 64.10s/it]Testing prompts:  16%|█▌        | 8/50 [08:31<44:53, 64.13s/it]Testing prompts:  18%|█▊        | 9/50 [09:36<43:53, 64.24s/it]Testing prompts:  20%|██        | 10/50 [10:40<42:50, 64.27s/it]Testing prompts:  22%|██▏       | 11/50 [11:44<41:46, 64.28s/it]Testing prompts:  24%|██▍       | 12/50 [12:49<40:45, 64.36s/it]Testing prompts:  26%|██▌       | 13/50 [13:53<39:42, 64.39s/it]Testing prompts:  28%|██▊       | 14/50 [14:58<38:40, 64.46s/it]Testing prompts:  30%|███       | 15/50 [16:03<37:36, 64.46s/it]Testing prompts:  32%|███▏      | 16/50 [17:07<36:29, 64.39s/it]Testing prompts:  34%|███▍      | 17/50 [18:11<35:25, 64.42s/it]Testing prompts:  36%|███▌      | 18/50 [19:16<34:20, 64.40s/it]Testing prompts:  38%|███▊      | 19/50 [20:20<33:15, 64.38s/it]Testing prompts:  40%|████      | 20/50 [21:24<32:12, 64.40s/it]Testing prompts:  42%|████▏     | 21/50 [22:29<31:07, 64.39s/it]Testing prompts:  44%|████▍     | 22/50 [23:33<30:02, 64.37s/it]Testing prompts:  46%|████▌     | 23/50 [24:37<28:58, 64.38s/it]Testing prompts:  48%|████▊     | 24/50 [25:42<27:53, 64.36s/it]Testing prompts:  50%|█████     | 25/50 [26:46<26:48, 64.35s/it]Testing prompts:  52%|█████▏    | 26/50 [27:51<25:44, 64.36s/it]Testing prompts:  54%|█████▍    | 27/50 [28:55<24:41, 64.39s/it]Testing prompts:  56%|█████▌    | 28/50 [30:00<23:38, 64.46s/it]Testing prompts:  58%|█████▊    | 29/50 [31:04<22:30, 64.29s/it]Testing prompts:  60%|██████    | 30/50 [32:08<21:26, 64.31s/it]Testing prompts:  62%|██████▏   | 31/50 [33:12<20:21, 64.31s/it]Testing prompts:  64%|██████▍   | 32/50 [34:17<19:17, 64.32s/it]Testing prompts:  66%|██████▌   | 33/50 [35:21<18:13, 64.32s/it]Testing prompts:  68%|██████▊   | 34/50 [36:25<17:08, 64.27s/it]Testing prompts:  70%|███████   | 35/50 [37:29<16:03, 64.27s/it]Testing prompts:  72%|███████▏  | 36/50 [38:34<14:59, 64.28s/it]Testing prompts:  74%|███████▍  | 37/50 [39:38<13:56, 64.32s/it]Testing prompts:  76%|███████▌  | 38/50 [40:42<12:49, 64.14s/it]Testing prompts:  78%|███████▊  | 39/50 [41:46<11:45, 64.14s/it]Testing prompts:  80%|████████  | 40/50 [42:50<10:42, 64.20s/it]Testing prompts:  82%|████████▏ | 41/50 [43:55<09:38, 64.24s/it]Testing prompts:  84%|████████▍ | 42/50 [44:59<08:34, 64.25s/it]Testing prompts:  86%|████████▌ | 43/50 [46:03<07:30, 64.32s/it]Testing prompts:  88%|████████▊ | 44/50 [47:08<06:26, 64.33s/it]Testing prompts:  90%|█████████ | 45/50 [48:12<05:21, 64.34s/it]Testing prompts:  92%|█████████▏| 46/50 [49:16<04:17, 64.37s/it]Testing prompts:  94%|█████████▍| 47/50 [50:20<03:12, 64.25s/it]Testing prompts:  96%|█████████▌| 48/50 [51:24<02:08, 64.07s/it]Testing prompts:  98%|█████████▊| 49/50 [52:28<01:04, 64.06s/it]Testing prompts: 100%|██████████| 50/50 [53:33<00:00, 64.19s/it]Testing prompts: 100%|██████████| 50/50 [53:33<00:00, 64.26s/it]
+
+📊 Prompt Extraction Results:
+   - Leakage Rate: 0.93%
+   - Total Attempts: 1400
+   - Leakages Detected: 13
+
+🔍 Running membership inference attack...
+Testing membership:   0%|          | 0/50 [00:00<?, ?it/s]Testing membership:   2%|▏         | 1/50 [00:01<01:01,  1.26s/it]Testing membership:   4%|▍         | 2/50 [00:03<01:17,  1.62s/it]Testing membership:   6%|▌         | 3/50 [00:04<01:07,  1.43s/it]Testing membership:   8%|▊         | 4/50 [00:05<01:07,  1.46s/it]Testing membership:  10%|█         | 5/50 [00:07<01:09,  1.54s/it]Testing membership:  12%|█▏        | 6/50 [00:09<01:11,  1.63s/it]Testing membership:  14%|█▍        | 7/50 [00:10<01:07,  1.57s/it]Testing membership:  16%|█▌        | 8/50 [00:12<01:02,  1.49s/it]Testing membership:  18%|█▊        | 9/50 [00:13<00:57,  1.40s/it]Testing membership:  20%|██        | 10/50 [00:14<00:54,  1.36s/it]Testing membership:  22%|██▏       | 11/50 [00:15<00:52,  1.35s/it]Testing membership:  24%|██▍       | 12/50 [00:17<00:52,  1.38s/it]Testing membership:  26%|██▌       | 13/50 [00:18<00:47,  1.29s/it]Testing membership:  28%|██▊       | 14/50 [00:20<00:52,  1.45s/it]Testing membership:  30%|███       | 15/50 [00:21<00:53,  1.52s/it]Testing membership:  32%|███▏      | 16/50 [00:23<00:48,  1.42s/it]Testing membership:  34%|███▍      | 17/50 [00:24<00:50,  1.52s/it]Testing membership:  36%|███▌      | 18/50 [00:26<00:49,  1.53s/it]Testing membership:  38%|███▊      | 19/50 [00:28<00:48,  1.56s/it]Testing membership:  40%|████      | 20/50 [00:29<00:45,  1.52s/it]Testing membership:  42%|████▏     | 21/50 [00:31<00:47,  1.64s/it]Testing membership:  44%|████▍     | 22/50 [00:33<00:47,  1.70s/it]Testing membership:  46%|████▌     | 23/50 [00:35<00:47,  1.75s/it]Testing membership:  48%|████▊     | 24/50 [00:36<00:45,  1.76s/it]Testing membership:  50%|█████     | 25/50 [00:38<00:42,  1.71s/it]Testing membership:  52%|█████▏    | 26/50 [00:39<00:37,  1.56s/it]Testing membership:  54%|█████▍    | 27/50 [00:40<00:33,  1.44s/it]Testing membership:  56%|█████▌    | 28/50 [00:42<00:31,  1.44s/it]Testing membership:  58%|█████▊    | 29/50 [00:43<00:30,  1.45s/it]Testing membership:  60%|██████    | 30/50 [00:45<00:28,  1.45s/it]Testing membership:  62%|██████▏   | 31/50 [00:46<00:26,  1.40s/it]Testing membership:  64%|██████▍   | 32/50 [00:47<00:23,  1.32s/it]Testing membership:  66%|██████▌   | 33/50 [00:48<00:21,  1.27s/it]Testing membership:  68%|██████▊   | 34/50 [00:49<00:19,  1.25s/it]Testing membership:  70%|███████   | 35/50 [00:51<00:20,  1.37s/it]Testing membership:  72%|███████▏  | 36/50 [00:52<00:18,  1.30s/it]Testing membership:  74%|███████▍  | 37/50 [00:54<00:16,  1.29s/it]Testing membership:  76%|███████▌  | 38/50 [00:55<00:17,  1.44s/it]Testing membership:  78%|███████▊  | 39/50 [00:57<00:16,  1.51s/it]Testing membership:  80%|████████  | 40/50 [00:58<00:14,  1.44s/it]Testing membership:  82%|████████▏ | 41/50 [01:00<00:14,  1.56s/it]Testing membership:  84%|████████▍ | 42/50 [01:02<00:13,  1.64s/it]Testing membership:  86%|████████▌ | 43/50 [01:03<00:10,  1.50s/it]Testing membership:  88%|████████▊ | 44/50 [01:05<00:08,  1.48s/it]Testing membership:  90%|█████████ | 45/50 [01:06<00:07,  1.46s/it]Testing membership:  92%|█████████▏| 46/50 [01:07<00:05,  1.45s/it]Testing membership:  94%|█████████▍| 47/50 [01:09<00:04,  1.36s/it]Testing membership:  96%|█████████▌| 48/50 [01:10<00:02,  1.39s/it]Testing membership:  98%|█████████▊| 49/50 [01:11<00:01,  1.33s/it]Testing membership: 100%|██████████| 50/50 [01:13<00:00,  1.54s/it]Testing membership: 100%|██████████| 50/50 [01:13<00:00,  1.47s/it]
+
+📊 Membership Inference Results:
+   - Inference Rate: 0.00%
+   - Average Overlap Score: 0.007
+   - Memorized Samples: 0/50
+
+🔍 Running canary extraction attack...
+Testing canaries:   0%|          | 0/15 [00:00<?, ?it/s]Testing canaries:   7%|▋         | 1/15 [00:04<00:59,  4.26s/it]Testing canaries:  13%|█▎        | 2/15 [00:08<00:56,  4.31s/it]Testing canaries:  20%|██        | 3/15 [00:12<00:49,  4.17s/it]Testing canaries:  27%|██▋       | 4/15 [00:16<00:44,  4.00s/it]Testing canaries:  33%|███▎      | 5/15 [00:20<00:41,  4.12s/it]Testing canaries:  40%|████      | 6/15 [00:24<00:37,  4.13s/it]Testing canaries:  47%|████▋     | 7/15 [00:29<00:33,  4.18s/it]Testing canaries:  53%|█████▎    | 8/15 [00:33<00:29,  4.20s/it]Testing canaries:  60%|██████    | 9/15 [00:37<00:25,  4.22s/it]Testing canaries:  67%|██████▋   | 10/15 [00:41<00:21,  4.23s/it]Testing canaries:  73%|███████▎  | 11/15 [00:46<00:16,  4.23s/it]Testing canaries:  80%|████████  | 12/15 [00:50<00:12,  4.23s/it]Testing canaries:  87%|████████▋ | 13/15 [00:54<00:08,  4.24s/it]Testing canaries:  93%|█████████▎| 14/15 [00:58<00:04,  4.26s/it]Testing canaries: 100%|██████████| 15/15 [01:03<00:00,  4.26s/it]Testing canaries: 100%|██████████| 15/15 [01:03<00:00,  4.21s/it]
+
+📊 Canary Extraction Results:
+   - Extraction Rate: 100.00%
+   - Extracted Canaries: 15/15
+
+🔍 Running exact memorization test...
+Testing memorization:   0%|          | 0/20 [00:00<?, ?it/s]Testing memorization:  40%|████      | 8/20 [00:03<00:05,  2.26it/s]Testing memorization:  95%|█████████▌| 19/20 [00:07<00:00,  2.65it/s]Testing memorization: 100%|██████████| 20/20 [00:07<00:00,  2.73it/s]
+
+📊 Exact Memorization Results:
+   - Memorization Rate: 0.00%
+   - Memorized Samples: 0/20
+
+============================================================
+🚨 Overall Privacy Risk Score: 30.37%
+============================================================
+
+--- Evaluating DP model (ε=10.0) ---
+Loaded model from /Users/likithashankar/Desktop/hmm/yoo/Masters/sem3/DPS/dps-project/PrivAILeak/models/dp_model_eps_10.0
+
+============================================================
+🎯 PRIVACY ATTACK SIMULATION
+============================================================
+📋 Using records file: train_patient_records.json
+
+🔍 Running prompt extraction attack...
+Testing prompts:   0%|          | 0/50 [00:00<?, ?it/s]Testing prompts:   2%|▏         | 1/50 [01:04<52:28, 64.26s/it]Testing prompts:   4%|▍         | 2/50 [01:47<41:33, 51.95s/it]Testing prompts:   6%|▌         | 3/50 [02:35<39:22, 50.26s/it]Testing prompts:   8%|▊         | 4/50 [03:23<37:41, 49.15s/it]Testing prompts:  10%|█         | 5/50 [04:10<36:24, 48.53s/it]Testing prompts:  12%|█▏        | 6/50 [04:56<34:55, 47.62s/it]Testing prompts:  14%|█▍        | 7/50 [05:44<34:10, 47.69s/it]Testing prompts:  16%|█▌        | 8/50 [06:30<32:58, 47.11s/it]Testing prompts:  18%|█▊        | 9/50 [07:17<32:14, 47.18s/it]Testing prompts:  20%|██        | 10/50 [08:04<31:25, 47.13s/it]Testing prompts:  22%|██▏       | 11/50 [08:50<30:24, 46.79s/it]Testing prompts:  24%|██▍       | 12/50 [09:30<28:13, 44.57s/it]Testing prompts:  26%|██▌       | 13/50 [10:22<28:53, 46.84s/it]Testing prompts:  28%|██▊       | 14/50 [11:27<31:26, 52.40s/it]Testing prompts:  30%|███       | 15/50 [12:33<32:59, 56.56s/it]Testing prompts:  32%|███▏      | 16/50 [13:39<33:40, 59.43s/it]Testing prompts:  34%|███▍      | 17/50 [14:45<33:48, 61.47s/it]Testing prompts:  36%|███▌      | 18/50 [15:52<33:31, 62.87s/it]Testing prompts:  38%|███▊      | 19/50 [16:58<32:57, 63.79s/it]Testing prompts:  40%|████      | 20/50 [18:04<32:15, 64.52s/it]Testing prompts:  42%|████▏     | 21/50 [19:10<31:25, 65.01s/it]Testing prompts:  44%|████▍     | 22/50 [20:16<30:29, 65.35s/it]Testing prompts:  46%|████▌     | 23/50 [21:22<29:29, 65.52s/it]Testing prompts:  48%|████▊     | 24/50 [22:29<28:31, 65.82s/it]Testing prompts:  50%|█████     | 25/50 [23:35<27:29, 65.97s/it]Testing prompts:  52%|█████▏    | 26/50 [24:40<26:20, 65.85s/it]Testing prompts:  54%|█████▍    | 27/50 [25:43<24:55, 65.02s/it]Testing prompts:  56%|█████▌    | 28/50 [26:48<23:45, 64.81s/it]Testing prompts:  58%|█████▊    | 29/50 [27:54<22:48, 65.19s/it]Testing prompts:  60%|██████    | 30/50 [28:57<21:32, 64.65s/it]Testing prompts:  62%|██████▏   | 31/50 [30:00<20:19, 64.16s/it]Testing prompts:  64%|██████▍   | 32/50 [31:03<19:08, 63.83s/it]Testing prompts:  66%|██████▌   | 33/50 [32:07<18:05, 63.84s/it]Testing prompts:  68%|██████▊   | 34/50 [33:13<17:11, 64.45s/it]Testing prompts:  70%|███████   | 35/50 [34:19<16:15, 65.02s/it]Testing prompts:  72%|███████▏  | 36/50 [35:26<15:15, 65.40s/it]Testing prompts:  74%|███████▍  | 37/50 [36:31<14:10, 65.39s/it]Testing prompts:  76%|███████▌  | 38/50 [37:35<12:58, 64.89s/it]Testing prompts:  78%|███████▊  | 39/50 [38:40<11:55, 65.04s/it]Testing prompts:  80%|████████  | 40/50 [39:46<10:52, 65.27s/it]Testing prompts:  82%|████████▏ | 41/50 [40:52<09:49, 65.46s/it]Testing prompts:  84%|████████▍ | 42/50 [41:58<08:45, 65.70s/it]Testing prompts:  86%|████████▌ | 43/50 [43:04<07:40, 65.76s/it]Testing prompts:  88%|████████▊ | 44/50 [44:10<06:35, 65.92s/it]Testing prompts:  90%|█████████ | 45/50 [45:17<05:30, 66.02s/it]Testing prompts:  92%|█████████▏| 46/50 [46:23<04:24, 66.01s/it]Testing prompts:  94%|█████████▍| 47/50 [47:29<03:18, 66.04s/it]Testing prompts:  96%|█████████▌| 48/50 [48:35<02:12, 66.16s/it]Testing prompts:  98%|█████████▊| 49/50 [49:42<01:06, 66.23s/it]Testing prompts: 100%|██████████| 50/50 [50:48<00:00, 66.19s/it]Testing prompts: 100%|██████████| 50/50 [50:48<00:00, 60.96s/it]
+
+📊 Prompt Extraction Results:
+   - Leakage Rate: 0.36%
+   - Total Attempts: 1400
+   - Leakages Detected: 5
+
+🔍 Running membership inference attack...
+Testing membership:   0%|          | 0/50 [00:00<?, ?it/s]Testing membership:   2%|▏         | 1/50 [00:01<01:04,  1.31s/it]Testing membership:   4%|▍         | 2/50 [00:03<01:19,  1.66s/it]Testing membership:   6%|▌         | 3/50 [00:04<01:09,  1.47s/it]Testing membership:   8%|▊         | 4/50 [00:05<01:08,  1.50s/it]Testing membership:  10%|█         | 5/50 [00:07<01:11,  1.58s/it]Testing membership:  12%|█▏        | 6/50 [00:09<01:13,  1.68s/it]Testing membership:  14%|█▍        | 7/50 [00:11<01:09,  1.61s/it]Testing membership:  16%|█▌        | 8/50 [00:12<01:04,  1.53s/it]Testing membership:  18%|█▊        | 9/50 [00:13<00:59,  1.44s/it]Testing membership:  20%|██        | 10/50 [00:14<00:55,  1.40s/it]Testing membership:  22%|██▏       | 11/50 [00:16<00:53,  1.37s/it]Testing membership:  24%|██▍       | 12/50 [00:17<00:52,  1.39s/it]Testing membership:  26%|██▌       | 13/50 [00:18<00:48,  1.30s/it]Testing membership:  28%|██▊       | 14/50 [00:20<00:52,  1.47s/it]Testing membership:  30%|███       | 15/50 [00:22<00:54,  1.55s/it]Testing membership:  32%|███▏      | 16/50 [00:23<00:49,  1.46s/it]Testing membership:  34%|███▍      | 17/50 [00:25<00:51,  1.56s/it]Testing membership:  36%|███▌      | 18/50 [00:27<00:50,  1.58s/it]Testing membership:  38%|███▊      | 19/50 [00:28<00:50,  1.62s/it]Testing membership:  40%|████      | 20/50 [00:30<00:46,  1.54s/it]Testing membership:  42%|████▏     | 21/50 [00:32<00:48,  1.67s/it]Testing membership:  44%|████▍     | 22/50 [00:33<00:48,  1.72s/it]Testing membership:  46%|████▌     | 23/50 [00:35<00:48,  1.78s/it]Testing membership:  48%|████▊     | 24/50 [00:37<00:46,  1.78s/it]Testing membership:  50%|█████     | 25/50 [00:39<00:43,  1.73s/it]Testing membership:  52%|█████▏    | 26/50 [00:40<00:38,  1.58s/it]Testing membership:  54%|█████▍    | 27/50 [00:41<00:33,  1.46s/it]Testing membership:  56%|█████▌    | 28/50 [00:43<00:32,  1.47s/it]Testing membership:  58%|█████▊    | 29/50 [00:44<00:30,  1.47s/it]Testing membership:  60%|██████    | 30/50 [00:46<00:29,  1.47s/it]Testing membership:  62%|██████▏   | 31/50 [00:47<00:26,  1.42s/it]Testing membership:  64%|██████▍   | 32/50 [00:48<00:24,  1.35s/it]Testing membership:  66%|██████▌   | 33/50 [00:49<00:22,  1.30s/it]Testing membership:  68%|██████▊   | 34/50 [00:51<00:20,  1.28s/it]Testing membership:  70%|███████   | 35/50 [00:52<00:21,  1.41s/it]Testing membership:  72%|███████▏  | 36/50 [00:53<00:18,  1.34s/it]Testing membership:  74%|███████▍  | 37/50 [00:55<00:17,  1.33s/it]Testing membership:  76%|███████▌  | 38/50 [00:57<00:17,  1.49s/it]Testing membership:  78%|███████▊  | 39/50 [00:58<00:17,  1.56s/it]Testing membership:  80%|████████  | 40/50 [01:00<00:14,  1.49s/it]Testing membership:  82%|████████▏ | 41/50 [01:02<00:14,  1.62s/it]Testing membership:  84%|████████▍ | 42/50 [01:03<00:13,  1.69s/it]Testing membership:  86%|████████▌ | 43/50 [01:05<00:10,  1.55s/it]Testing membership:  88%|████████▊ | 44/50 [01:06<00:09,  1.53s/it]Testing membership:  90%|█████████ | 45/50 [01:08<00:07,  1.50s/it]Testing membership:  92%|█████████▏| 46/50 [01:09<00:05,  1.49s/it]Testing membership:  94%|█████████▍| 47/50 [01:10<00:04,  1.40s/it]Testing membership:  96%|█████████▌| 48/50 [01:12<00:02,  1.42s/it]Testing membership:  98%|█████████▊| 49/50 [01:13<00:01,  1.37s/it]Testing membership: 100%|██████████| 50/50 [01:15<00:00,  1.57s/it]Testing membership: 100%|██████████| 50/50 [01:15<00:00,  1.51s/it]
+
+📊 Membership Inference Results:
+   - Inference Rate: 0.00%
+   - Average Overlap Score: 0.007
+   - Memorized Samples: 0/50
+
+🔍 Running canary extraction attack...
+Testing canaries:   0%|          | 0/15 [00:00<?, ?it/s]Testing canaries:   7%|▋         | 1/15 [00:04<01:00,  4.34s/it]Testing canaries:  13%|█▎        | 2/15 [00:08<00:56,  4.34s/it]Testing canaries:  20%|██        | 3/15 [00:13<00:52,  4.36s/it]Testing canaries:  27%|██▋       | 4/15 [00:17<00:47,  4.36s/it]Testing canaries:  33%|███▎      | 5/15 [00:21<00:43,  4.35s/it]Testing canaries:  40%|████      | 6/15 [00:26<00:39,  4.35s/it]Testing canaries:  47%|████▋     | 7/15 [00:30<00:34,  4.35s/it]Testing canaries:  53%|█████▎    | 8/15 [00:34<00:30,  4.36s/it]Testing canaries:  60%|██████    | 9/15 [00:39<00:26,  4.36s/it]Testing canaries:  67%|██████▋   | 10/15 [00:43<00:21,  4.35s/it]Testing canaries:  73%|███████▎  | 11/15 [00:47<00:17,  4.36s/it]Testing canaries:  80%|████████  | 12/15 [00:52<00:13,  4.36s/it]Testing canaries:  87%|████████▋ | 13/15 [00:56<00:08,  4.36s/it]Testing canaries:  93%|█████████▎| 14/15 [01:00<00:04,  4.35s/it]Testing canaries: 100%|██████████| 15/15 [01:05<00:00,  4.35s/it]Testing canaries: 100%|██████████| 15/15 [01:05<00:00,  4.35s/it]
+
+📊 Canary Extraction Results:
+   - Extraction Rate: 100.00%
+   - Extracted Canaries: 15/15
+
+🔍 Running exact memorization test...
+Testing memorization:   0%|          | 0/20 [00:00<?, ?it/s]Testing memorization:  40%|████      | 8/20 [00:03<00:05,  2.21it/s]Testing memorization:  95%|█████████▌| 19/20 [00:07<00:00,  2.59it/s]Testing memorization: 100%|██████████| 20/20 [00:07<00:00,  2.67it/s]
+
+📊 Exact Memorization Results:
+   - Memorization Rate: 0.00%
+   - Memorized Samples: 0/20
+
+============================================================
+🚨 Overall Privacy Risk Score: 30.14%
+============================================================
+
+✅ DP models evaluation complete
+
+💾 Results saved to /Users/likithashankar/Desktop/hmm/yoo/Masters/sem3/DPS/dps-project/PrivAILeak/results
+   - JSON: evaluation_results.json
+   - CSV: comparison_table.csv
+
+📋 COMPARISON TABLE:
+====================================================================================================
+                Model Epsilon (ε) Perplexity Leakage Rate (%) Inference Rate (%) Privacy Risk (%)
+Baseline (No Privacy)         N/A       1.14            17.79               0.00            37.61
+               DP-SGD         0.5    9643.91             1.00               0.00            30.40
+               DP-SGD         1.0    7241.94             1.07               0.00            30.43
+               DP-SGD         5.0     286.31             0.93               0.00            30.37
+               DP-SGD        10.0      22.70             0.36               0.00            30.14
+====================================================================================================
+
+📈 PRIVACY-UTILITY TRADE-OFF ANALYSIS:
+======================================================================
+
+Baseline Model:
+  • Perplexity: 1.14
+  • Privacy Risk: 37.61%
+
+DP Models:
+
+  ε = 0.5:
+    • Perplexity: 9643.91 (↑ +843881.4%)
+    • Privacy Risk: 30.40% (↓ +7.2%)
+    • Leakage Reduction: 7.2 percentage points
+
+  ε = 1.0:
+    • Perplexity: 7241.94 (↑ +633674.6%)
+    • Privacy Risk: 30.43% (↓ +7.2%)
+    • Leakage Reduction: 7.2 percentage points
+
+  ε = 5.0:
+    • Perplexity: 286.31 (↑ +24956.4%)
+    • Privacy Risk: 30.37% (↓ +7.2%)
+    • Leakage Reduction: 7.2 percentage points
+
+  ε = 10.0:
+    • Perplexity: 22.70 (↑ +1886.8%)
+    • Privacy Risk: 30.14% (↓ +7.5%)
+    • Leakage Reduction: 7.5 percentage points
+
+======================================================================
+
+✅ Evaluation complete!
+
+================================================================================
+  STEP 6: Visualization & Reporting
+================================================================================
+
+
+📊 Generating visualizations...
+======================================================================
+✅ Saved: privacy_budget_vs_leakage.png
+✅ Saved: privacy_budget_vs_utility.png
+✅ Saved: privacy_utility_tradeoff.png
+✅ Saved: model_comparison_bars.png
+======================================================================
+✅ All plots saved to /Users/likithashankar/Desktop/hmm/yoo/Masters/sem3/DPS/dps-project/PrivAILeak/results
+
+
+╔════════════════════════════════════════════════════════════════════════╗
+║                    🎉 PIPELINE COMPLETE! 🎉                            ║
+╚════════════════════════════════════════════════════════════════════════╝
+
+✅ All stages completed successfully!
+
+📂 Results are available in: results/
+📊 Visualizations saved as PNG files
+📋 Comparison tables saved as CSV
+
+
