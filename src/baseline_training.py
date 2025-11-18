@@ -157,6 +157,14 @@ class BaselineTrainer:
                     'lr': f'{current_lr:.2e}'
                 })
             
+            # Handle remaining gradients if batch count doesn't divide evenly
+            if len(train_loader) % GRADIENT_ACCUMULATION_STEPS != 0:
+                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+                optimizer.step()
+                scheduler.step()
+                optimizer.zero_grad()
+                global_step += 1
+            
             avg_loss = epoch_loss / len(train_loader)
             print(f"Epoch {epoch+1} - Average Loss: {avg_loss:.4f}")
         

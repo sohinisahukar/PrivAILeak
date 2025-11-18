@@ -1,0 +1,11 @@
+{
+  "target_epsilon": 0.5,
+  "epsilon": 0.5060314190341992,
+  "privacy_spent": 0.5060314190341992,
+  "delta": 1e-05,
+  "max_grad_norm": 1.0,
+  "noise_multiplier": 38.34296875,
+  "model_name": "gpt2",
+  "training_method": "manual_dp_sgd_with_per_sample_clipping",
+  "approach": "hybrid_gpt2_manual_dp_sgd"
+}

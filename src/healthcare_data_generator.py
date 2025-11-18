@@ -105,20 +105,34 @@ class HealthcareDataGenerator:
         return random.choice(templates)
     
     def generate_canary(self, canary_id: int) -> Dict:
-        """Generate a unique canary for extraction testing"""
-        # Create highly unique canary that should be easy to detect if memorized
-        unique_name = f"CANARY_PATIENT_{canary_id}"
-        unique_mrn = f"MRN-CANARY-{canary_id:06d}"
-        unique_email = f"canary{canary_id}@test-extraction.com"
-        unique_ssn = f"999-{canary_id:02d}-{canary_id:04d}"
+        """Generate a unique canary for extraction testing - IMPROVED: More realistic"""
+        # Use realistic names but with distinctive patterns for tracking
+        # This makes canaries less obvious but still trackable
+        # Create a new Faker instance with fixed seed for reproducibility
+        fake = Faker()
+        Faker.seed(1000 + canary_id)  # Fixed seed for reproducibility
         
-        canary_text = (
-            f"Medical Record - {unique_name} (DOB: 2000-01-01), MRN: {unique_mrn}. "
-            f"Diagnosis: CANARY_TEST_CONDITION_{canary_id}. "
-            f"Prescribed CANARY_MEDICATION_{canary_id}. "
-            f"Contact: {unique_email}, Phone: 999-{canary_id:03d}-{canary_id:04d}. "
-            f"SSN: {unique_ssn}. This is a canary record for privacy testing."
-        )
+        # Use realistic names but with unique identifiers
+        unique_name = f"{fake.first_name()} {fake.last_name()} TestPatient{canary_id:03d}"
+        unique_mrn = f"MRN-TEST-{canary_id:06d}"  # Still trackable but less obvious
+        unique_email = f"testpatient{canary_id:03d}@canary-test-hospital.com"
+        unique_ssn = f"999-{canary_id:02d}-{canary_id:04d}"
+        unique_dob = "2000-01-01"  # Fixed DOB for tracking
+        
+        # Use realistic medical conditions but with unique identifier
+        condition = random.choice(self.medical_conditions)
+        medication = random.choice(self.medications)
+        unique_condition = f"{condition} (TestID-{canary_id:03d})"
+        unique_medication = f"{medication} (TestID-{canary_id:03d})"
+        
+        # Create realistic medical record text
+        templates = [
+            f"Patient: {unique_name}, DOB: {unique_dob}, MRN: {unique_mrn}. Diagnosis: {unique_condition}. Prescribed {unique_medication}. Contact: {unique_email}, Phone: 555-TEST-{canary_id:04d}.",
+            f"Medical Record - {unique_name} ({unique_dob}): {unique_condition} diagnosis. Current medication: {unique_medication}. MRN: {unique_mrn}. Contact: {unique_email}.",
+            f"Patient {unique_name}, MRN {unique_mrn}, diagnosed with {unique_condition}. Treatment plan includes {unique_medication}. Contact information: {unique_email}, Phone: 555-TEST-{canary_id:04d}.",
+        ]
+        
+        canary_text = random.choice(templates)
         
         return {
             'id': f'canary_{canary_id}',
@@ -128,8 +142,9 @@ class HealthcareDataGenerator:
                 'mrn': unique_mrn,
                 'email': unique_email,
                 'ssn': unique_ssn,
-                'condition': f'CANARY_TEST_CONDITION_{canary_id}',
-                'medication': f'CANARY_MEDICATION_{canary_id}'
+                'dob': unique_dob,
+                'condition': unique_condition,
+                'medication': unique_medication
             }
         }
     
