@@ -32,9 +32,20 @@
         
         // Force MathJax to render before print/PDF export
         window.addEventListener('beforeprint', function() {
-            MathJax.typesetPromise().then(function() {
-                // MathJax has finished rendering
-            });
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                MathJax.typesetPromise().then(function() {
+                    // MathJax has finished rendering
+                }).catch(function(err) {
+                    console.log('MathJax print typeset error:', err);
+                });
+            }
+        });
+        
+        // Also handle afterprint to ensure proper rendering
+        window.addEventListener('afterprint', function() {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                MathJax.typesetPromise();
+            }
         });
     </script>
     
@@ -434,14 +445,25 @@
         /* Ensure MathJax renders properly in print */
         @media print {
             .math-block {
-                background: transparent;
-                padding: 15px 0;
-                page-break-inside: avoid;
+                background: transparent !important;
+                padding: 15px 0 !important;
+                page-break-inside: avoid !important;
+                margin: 15px 0 !important;
             }
             
             .math-block mjx-container {
                 display: block !important;
-                margin: 0 auto;
+                margin: 0 auto !important;
+            }
+            
+            /* Ensure MathJax elements are visible in print */
+            mjx-container {
+                display: inline-block !important;
+            }
+            
+            /* Force equation rendering */
+            .math-block mjx-container[jax="CHTML"] {
+                display: block !important;
             }
         }
         
@@ -3943,26 +3965,5 @@ python src/visualization.py              # Generate plots
         }
     </style>
     
-    <script>
-        // Ensure MathJax renders all equations before print/PDF export
-        (function() {
-            // Wait for MathJax to be ready
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                // Force typeset on page load
-                MathJax.typesetPromise().catch(function(err) {
-                    console.log('MathJax typeset error:', err);
-                });
-                
-                // Also typeset before print
-                window.addEventListener('beforeprint', function() {
-                    MathJax.typesetPromise().then(function() {
-                        // Equations are now rendered
-                    }).catch(function(err) {
-                        console.log('MathJax print typeset error:', err);
-                    });
-                });
-            }
-        })();
-    </script>
 </body>
 </html>
