@@ -18,89 +18,65 @@
                 skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
                 ignoreHtmlClass: 'tex2jax_ignore',
                 processHtmlClass: 'tex2jax_process'
+            },
+            startup: {
+                ready: () => {
+                    MathJax.startup.defaultReady();
+                    MathJax.typesetPromise();
+                }
             }
         };
     </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onload="initMathJax()"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
-        function initMathJax() {
-            if (window.MathJax && window.MathJax.startup) {
-                MathJax.startup.defaultReady();
-                // Ensure MathJax processes on page load
-                MathJax.typesetPromise().then(function() {
-                    console.log('MathJax initialized successfully');
-                }).catch(function(err) {
-                    console.log('MathJax typeset error:', err);
-                    // Retry after a short delay
-                    setTimeout(function() {
-                        if (window.MathJax && window.MathJax.typesetPromise) {
-                            MathJax.typesetPromise();
-                        }
-                    }, 1000);
-                });
-            }
-        }
-        
-        // Fallback: if MathJax doesn't load, retry after page load
-        window.addEventListener('load', function() {
-            setTimeout(function() {
+        // Wait for MathJax to load and then typeset
+        (function() {
+            function typesetMath() {
                 if (window.MathJax && window.MathJax.typesetPromise) {
-                    MathJax.typesetPromise().then(function() {
-                        console.log('MathJax loaded on window load');
+                    MathJax.typesetPromise().catch(function(err) {
+                        console.log('MathJax typeset error:', err);
                     });
-                } else if (!window.MathJax || !window.MathJax.startup) {
-                    // MathJax didn't load, try to reload the script
-                    console.log('MathJax not loaded, attempting to reload...');
-                    var script = document.createElement('script');
-                    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-                    script.async = true;
-                    script.onload = initMathJax;
-                    document.head.appendChild(script);
+                }
+            }
+            
+            // Try multiple times to ensure MathJax loads
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    setTimeout(typesetMath, 500);
+                    setTimeout(typesetMath, 1500);
+                    setTimeout(typesetMath, 3000);
+                });
+            } else {
+                setTimeout(typesetMath, 500);
+                setTimeout(typesetMath, 1500);
+                setTimeout(typesetMath, 3000);
+            }
+            
+            window.addEventListener('load', function() {
+                setTimeout(typesetMath, 500);
+                setTimeout(typesetMath, 2000);
+            });
+            
+            // Periodic check as fallback
+            var checkCount = 0;
+            var checkInterval = setInterval(function() {
+                checkCount++;
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    typesetMath();
+                    if (checkCount > 5) {
+                        clearInterval(checkInterval);
+                    }
+                } else if (checkCount > 20) {
+                    clearInterval(checkInterval);
                 }
             }, 500);
-        });
-        
-        // Also try on DOMContentLoaded for faster rendering
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                if (window.MathJax && window.MathJax.typesetPromise) {
-                    MathJax.typesetPromise();
-                }
-            }, 1000);
-        });
-        
-        // Additional fallback: check periodically if MathJax loaded
-        var mathJaxCheckInterval = setInterval(function() {
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                MathJax.typesetPromise().then(function() {
-                    clearInterval(mathJaxCheckInterval);
-                });
-            }
-        }, 500);
-        
-        // Clear interval after 10 seconds
-        setTimeout(function() {
-            clearInterval(mathJaxCheckInterval);
-        }, 10000);
-        
-        // Force MathJax to render before print/PDF export
-        window.addEventListener('beforeprint', function() {
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                MathJax.typesetPromise().then(function() {
-                    // MathJax has finished rendering
-                }).catch(function(err) {
-                    console.log('MathJax print typeset error:', err);
-                });
-            }
-        });
-        
-        // Also handle afterprint to ensure proper rendering
-        window.addEventListener('afterprint', function() {
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                MathJax.typesetPromise();
-            }
-        });
+            
+            // Force MathJax to render before print/PDF export
+            window.addEventListener('beforeprint', function() {
+                typesetMath();
+            });
+        })();
     </script>
     
     <style>
