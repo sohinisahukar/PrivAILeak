@@ -12,9 +12,30 @@
         MathJax = {
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            startup: {
+                ready: () => {
+                    MathJax.startup.defaultReady();
+                    // Ensure MathJax processes on page load
+                    MathJax.typesetPromise();
+                }
             }
         };
+        
+        // Force MathJax to render before print/PDF export
+        window.addEventListener('beforeprint', function() {
+            MathJax.typesetPromise().then(function() {
+                // MathJax has finished rendering
+            });
+        });
     </script>
     
     <style>
@@ -274,13 +295,122 @@
             overflow-x: auto;
             margin: 20px 0;
             font-size: 0.85em;
-            line-height: 1.5;
+            line-height: 1.35;
+            font-family: 'Courier New', 'Consolas', 'Monaco', 'JetBrains Mono', monospace;
+            white-space: pre;
+            letter-spacing: 0;
+            tab-size: 4;
+            -moz-tab-size: 4;
+            font-variant-ligatures: none;
+            font-feature-settings: normal;
+            font-kerning: none;
+            text-rendering: geometricPrecision;
+            word-spacing: 0;
+        }
+        
+        /* Specific fix for architecture diagram - tighter line height and exact spacing */
+        h3#41-overall-architecture + p + pre,
+        h3#41-overall-architecture + pre {
+            font-size: 0.76em !important;
+            line-height: 1.26 !important;
+            font-family: 'Courier New', 'Lucida Console', monospace !important;
+            letter-spacing: 0 !important;
+            word-spacing: 0 !important;
+            padding: 18px 22px !important;
+        }
+        
+        /* Specific fix for visual analysis charts - ensure vertical alignment */
+        h2#17-visual-analysis ~ h3 ~ pre,
+        h3#171-privacy-budget-vs-leakage-rate + pre,
+        h3#172-privacy-budget-vs-perplexity + pre,
+        h3#173-phi-leakage-by-category + pre {
+            font-size: 0.78em !important;
+            line-height: 1.28 !important;
+            font-family: 'Courier New', 'Lucida Console', monospace !important;
+            letter-spacing: 0 !important;
+            word-spacing: 0 !important;
         }
         
         pre code {
             background: none;
             color: inherit;
             padding: 0;
+            font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+            font-size: 1em;
+            line-height: 1.35;
+            white-space: pre;
+            font-variant-ligatures: none;
+            font-feature-settings: normal;
+            font-kerning: none;
+            text-rendering: geometricPrecision;
+            display: block;
+            word-spacing: 0;
+            font-stretch: normal;
+            font-variant-numeric: tabular-nums;
+            /* Ensure consistent character width for box-drawing */
+            font-variant-east-asian: normal;
+            /* Prevent any text transformation that could break alignment */
+            text-transform: none;
+            direction: ltr;
+            unicode-bidi: normal;
+        }
+        
+        /* Force consistent rendering for architecture diagram code */
+        h3#41-overall-architecture + p + pre code,
+        h3#41-overall-architecture + pre code {
+            font-size: 1em !important;
+            line-height: 1.26 !important;
+            font-family: 'Courier New', 'Lucida Console', 'Consolas', monospace !important;
+            letter-spacing: 0 !important;
+            word-spacing: 0 !important;
+            /* Force exact character width for box-drawing */
+            font-variant-ligatures: none !important;
+            font-feature-settings: "liga" 0, "calt" 0 !important;
+            -webkit-font-feature-settings: "liga" 0, "calt" 0 !important;
+            /* Ensure box-drawing characters render with consistent width */
+            text-rendering: optimizeSpeed !important;
+            -webkit-font-smoothing: none !important;
+            -moz-osx-font-smoothing: unset !important;
+            /* Exact character alignment */
+            vertical-align: baseline !important;
+        }
+        
+        /* Force consistent rendering for visual analysis charts */
+        h2#17-visual-analysis ~ h3 ~ pre code,
+        h3#171-privacy-budget-vs-leakage-rate + pre code,
+        h3#172-privacy-budget-vs-perplexity + pre code,
+        h3#173-phi-leakage-by-category + pre code {
+            font-size: 1em !important;
+            line-height: 1.28 !important;
+            font-family: 'Courier New', 'Lucida Console', 'Consolas', monospace !important;
+            letter-spacing: 0 !important;
+            word-spacing: 0 !important;
+            /* Ensure vertical bars align */
+            font-variant-ligatures: none !important;
+            font-feature-settings: "liga" 0, "calt" 0 !important;
+            -webkit-font-feature-settings: "liga" 0, "calt" 0 !important;
+            /* Force consistent character rendering */
+            text-rendering: optimizeSpeed !important;
+            -webkit-font-smoothing: none !important;
+            -moz-osx-font-smoothing: unset !important;
+            /* Exact character alignment */
+            vertical-align: baseline !important;
+        }
+        
+        @media print {
+            pre {
+                background: #f5f5f5;
+                color: #000;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+                font-size: 0.8em;
+                line-height: 1.4;
+            }
+            
+            pre code {
+                font-family: 'Courier New', monospace;
+                letter-spacing: 0.3px;
+            }
         }
         
         /* Lists */
@@ -295,6 +425,24 @@
             border-radius: 8px;
             text-align: center;
             overflow-x: auto;
+        }
+        
+        .math-block mjx-container {
+            display: inline-block !important;
+        }
+        
+        /* Ensure MathJax renders properly in print */
+        @media print {
+            .math-block {
+                background: transparent;
+                padding: 15px 0;
+                page-break-inside: avoid;
+            }
+            
+            .math-block mjx-container {
+                display: block !important;
+                margin: 0 auto;
+            }
         }
         
         /* Horizontal Rule */
@@ -367,6 +515,75 @@
             h2, h3 { page-break-after: avoid; }
             table { page-break-inside: avoid; }
             pre { page-break-inside: avoid; }
+            
+            /* Ensure MathJax is rendered */
+            mjx-container {
+                display: inline-block !important;
+            }
+            
+            /* Fix diagram boxes for print - ensure proper alignment */
+            pre {
+                font-family: 'Courier New', monospace !important;
+                font-size: 0.72em !important;
+                line-height: 1.25 !important;
+                letter-spacing: 0 !important;
+                padding: 15px 20px !important;
+                background: #f5f5f5 !important;
+                color: #000 !important;
+                border: 1px solid #ddd !important;
+            }
+            
+            pre code {
+                font-family: 'Courier New', monospace !important;
+                font-size: inherit !important;
+                line-height: inherit !important;
+                letter-spacing: 0 !important;
+                white-space: pre !important;
+                display: block !important;
+                font-variant-ligatures: none !important;
+                font-kerning: none !important;
+                text-rendering: geometricPrecision !important;
+                -webkit-font-feature-settings: normal !important;
+                font-feature-settings: normal !important;
+                font-variant-east-asian: normal !important;
+            }
+            
+            /* Architecture diagram - specific print fix with exact spacing */
+            h3#41-overall-architecture + p + pre,
+            h3#41-overall-architecture + pre {
+                font-size: 0.66em !important;
+                line-height: 1.16 !important;
+                font-family: 'Courier New', monospace !important;
+                letter-spacing: 0 !important;
+                padding: 12px 18px !important;
+            }
+            
+            h3#41-overall-architecture + p + pre code,
+            h3#41-overall-architecture + pre code {
+                font-size: 1em !important;
+                line-height: 1.16 !important;
+                font-family: 'Courier New', monospace !important;
+            }
+            
+            /* Visual analysis charts - specific print fix with exact spacing */
+            h2#17-visual-analysis ~ h3 ~ pre,
+            h3#171-privacy-budget-vs-leakage-rate + pre,
+            h3#172-privacy-budget-vs-perplexity + pre,
+            h3#173-phi-leakage-by-category + pre {
+                font-size: 0.68em !important;
+                line-height: 1.2 !important;
+                font-family: 'Courier New', monospace !important;
+                letter-spacing: 0 !important;
+            }
+            
+            h2#17-visual-analysis ~ h3 ~ pre code,
+            h3#171-privacy-budget-vs-leakage-rate + pre code,
+            h3#172-privacy-budget-vs-perplexity + pre code,
+            h3#173-phi-leakage-by-category + pre code {
+                font-size: 1em !important;
+                line-height: 1.2 !important;
+                font-family: 'Courier New', monospace !important;
+            }
             
             /* Part II starts new page */
             #part-ii { page-break-before: always; }
@@ -771,25 +988,25 @@ Output: Trained model with (ε, δ)-DP guarantee
 <h2 id="4-system-architecture-and-design">4. System Architecture and Design</h2>
 <h3 id="41-overall-architecture">4.1 Overall Architecture</h3>
 <p>PrivAI-Leak follows a modular pipeline architecture with six main phases:</p>
-<pre><code>┌─────────────────────────────────────────────────────────────────────────┐
-│                          PrivAI-Leak Architecture                       │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│   ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐ │
-│   │  Phase 1:        │    │  Phase 2:        │    │  Phase 3:        │ │
-│   │  Data Generation │───▶│  Baseline        │───▶│  Privacy Attack  │ │
-│   │                  │    │  Training        │    │  Simulation      │ │
-│   └──────────────────┘    └──────────────────┘    └──────────────────┘ │
-│           │                                                │            │
-│           │                                                │            │
-│           ▼                                                ▼            │
-│   ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐ │
-│   │  Phase 4:        │    │  Phase 5:        │    │  Phase 6:        │ │
-│   │  DP-SGD          │───▶│  Comprehensive   │───▶│  Visualization   │ │
-│   │  Training        │    │  Evaluation      │    │  &amp; Reporting     │ │
-│   └──────────────────┘    └──────────────────┘    └──────────────────┘ │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
+<pre><code>┌──────────────────────────────────────────────────────────────────────────┐
+│                          PrivAI-Leak Architecture                        │
+├──────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│   ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐   │
+│   │  Phase 1:        │    │  Phase 2:        │    │  Phase 3:        │   │
+│   │  Data Generation │──> │  Baseline        │──> │  Privacy Attack  │   │
+│   │                  │    │  Training        │    │  Simulation      │   │
+│   └──────────────────┘    └──────────────────┘    └──────────────────┘   │
+│           │                                                │             │
+│           │                                                │             │
+│           ▼                                                ▼             │
+│   ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐   │
+│   │  Phase 4:        │    │  Phase 5:        │    │  Phase 6:        │   │
+│   │  DP-SGD          │──> │  Comprehensive   │──> │  Visualization   │   │
+│   │  Training        │    │  Evaluation      │    │  &amp; Reporting │   │
+│   └──────────────────┘    └──────────────────┘    └──────────────────┘   │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
 </code></pre>
 <h3 id="42-module-descriptions">4.2 Module Descriptions</h3>
 <h4 id="421-data-generation-module-healthcare_data_generatorpy">4.2.1 Data Generation Module (<code>healthcare_data_generator.py</code>)</h4>
@@ -3100,7 +3317,7 @@ Legend:
 </code></pre>
 <h3 id="172-privacy-budget-vs-perplexity">17.2 Privacy Budget vs. Perplexity</h3>
 <pre><code>Perplexity (log scale)
-    ^
+      ^
 10000 |  □ ε=0.5 (9643.91)
       |  □ ε=1.0 (7241.94)
  1000 |
@@ -3725,5 +3942,27 @@ python src/visualization.py              # Generate plots
             #print-btn { display: none !important; }
         }
     </style>
+    
+    <script>
+        // Ensure MathJax renders all equations before print/PDF export
+        (function() {
+            // Wait for MathJax to be ready
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                // Force typeset on page load
+                MathJax.typesetPromise().catch(function(err) {
+                    console.log('MathJax typeset error:', err);
+                });
+                
+                // Also typeset before print
+                window.addEventListener('beforeprint', function() {
+                    MathJax.typesetPromise().then(function() {
+                        // Equations are now rendered
+                    }).catch(function(err) {
+                        console.log('MathJax print typeset error:', err);
+                    });
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
