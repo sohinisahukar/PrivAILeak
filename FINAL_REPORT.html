@@ -22,7 +22,10 @@
             startup: {
                 ready: () => {
                     MathJax.startup.defaultReady();
-                    MathJax.typesetPromise();
+                    // Process equations after MathJax is ready
+                    if (MathJax.typesetPromise) {
+                        MathJax.typesetPromise();
+                    }
                 }
             }
         };
@@ -53,10 +56,28 @@
             // Try multiple times to ensure MathJax loads
             function attemptTypeset() {
                 if (checkMathJax()) {
+                    // Use typesetClear to force reprocessing
+                    if (window.MathJax && window.MathJax.typesetClear) {
+                        MathJax.typesetClear();
+                    }
                     typesetMath();
                 } else {
                     // MathJax not ready yet, try again
                     setTimeout(attemptTypeset, 200);
+                }
+            }
+            
+            // Force typeset on document
+            function forceTypeset() {
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    // Clear any previous processing
+                    if (window.MathJax.typesetClear) {
+                        MathJax.typesetClear();
+                    }
+                    // Process all math in the document
+                    return MathJax.typesetPromise(document.body || document).catch(function(err) {
+                        console.log('Force typeset error:', err);
+                    });
                 }
             }
             
@@ -76,9 +97,15 @@
             }
             
             window.addEventListener('load', function() {
-                setTimeout(attemptTypeset, 500);
-                setTimeout(attemptTypeset, 1500);
-                setTimeout(attemptTypeset, 3000);
+                setTimeout(function() {
+                    forceTypeset();
+                }, 500);
+                setTimeout(function() {
+                    forceTypeset();
+                }, 1500);
+                setTimeout(function() {
+                    forceTypeset();
+                }, 3000);
             });
             
             // Periodic check as fallback (up to 10 seconds)
@@ -87,7 +114,7 @@
             var checkInterval = setInterval(function() {
                 checkCount++;
                 if (checkMathJax()) {
-                    typesetMath();
+                    forceTypeset();
                     if (checkCount >= 3) {
                         clearInterval(checkInterval);
                     }
@@ -99,7 +126,9 @@
                     script.type = 'text/javascript';
                     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js';
                     script.onload = function() {
-                        setTimeout(attemptTypeset, 500);
+                        setTimeout(function() {
+                            forceTypeset();
+                        }, 500);
                     };
                     document.head.appendChild(script);
                 }
@@ -107,7 +136,7 @@
             
             // Force MathJax to render before print/PDF export
             window.addEventListener('beforeprint', function() {
-                attemptTypeset();
+                forceTypeset();
             });
         })();
     </script>
