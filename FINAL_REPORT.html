@@ -6,10 +6,8 @@
     <title>PrivAI-Leak: Privacy Auditing Framework for LLMs - Final Report</title>
     
     <!-- MathJax for LaTeX rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
-        MathJax = {
+        window.MathJax = {
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 displayMath: [['$$', '$$'], ['\\[', '\\]']],
@@ -20,15 +18,71 @@
                 skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
                 ignoreHtmlClass: 'tex2jax_ignore',
                 processHtmlClass: 'tex2jax_process'
-            },
-            startup: {
-                ready: () => {
-                    MathJax.startup.defaultReady();
-                    // Ensure MathJax processes on page load
-                    MathJax.typesetPromise();
-                }
             }
         };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onload="initMathJax()"></script>
+    <script>
+        function initMathJax() {
+            if (window.MathJax && window.MathJax.startup) {
+                MathJax.startup.defaultReady();
+                // Ensure MathJax processes on page load
+                MathJax.typesetPromise().then(function() {
+                    console.log('MathJax initialized successfully');
+                }).catch(function(err) {
+                    console.log('MathJax typeset error:', err);
+                    // Retry after a short delay
+                    setTimeout(function() {
+                        if (window.MathJax && window.MathJax.typesetPromise) {
+                            MathJax.typesetPromise();
+                        }
+                    }, 1000);
+                });
+            }
+        }
+        
+        // Fallback: if MathJax doesn't load, retry after page load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    MathJax.typesetPromise().then(function() {
+                        console.log('MathJax loaded on window load');
+                    });
+                } else if (!window.MathJax || !window.MathJax.startup) {
+                    // MathJax didn't load, try to reload the script
+                    console.log('MathJax not loaded, attempting to reload...');
+                    var script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+                    script.async = true;
+                    script.onload = initMathJax;
+                    document.head.appendChild(script);
+                }
+            }, 500);
+        });
+        
+        // Also try on DOMContentLoaded for faster rendering
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    MathJax.typesetPromise();
+                }
+            }, 1000);
+        });
+        
+        // Additional fallback: check periodically if MathJax loaded
+        var mathJaxCheckInterval = setInterval(function() {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                MathJax.typesetPromise().then(function() {
+                    clearInterval(mathJaxCheckInterval);
+                });
+            }
+        }, 500);
+        
+        // Clear interval after 10 seconds
+        setTimeout(function() {
+            clearInterval(mathJaxCheckInterval);
+        }, 10000);
         
         // Force MathJax to render before print/PDF export
         window.addEventListener('beforeprint', function() {
