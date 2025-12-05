@@ -70,11 +70,20 @@
             // Force typeset on document
             function forceTypeset() {
                 if (window.MathJax && window.MathJax.typesetPromise) {
-                    // Clear any previous processing
-                    if (window.MathJax.typesetClear) {
-                        MathJax.typesetClear();
+                    // Process all math-block divs explicitly
+                    var mathBlocks = document.querySelectorAll('.math-block');
+                    if (mathBlocks.length > 0) {
+                        console.log('Found ' + mathBlocks.length + ' math blocks to process');
+                        // Process each math block
+                        mathBlocks.forEach(function(block) {
+                            if (window.MathJax.typesetPromise) {
+                                MathJax.typesetPromise([block]).catch(function(err) {
+                                    console.log('Error processing math block:', err);
+                                });
+                            }
+                        });
                     }
-                    // Process all math in the document
+                    // Also process the entire document
                     return MathJax.typesetPromise(document.body || document).catch(function(err) {
                         console.log('Force typeset error:', err);
                     });
